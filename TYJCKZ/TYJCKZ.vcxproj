@@ -129,7 +129,6 @@
     <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F1xxxx\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_sdmmc.h" />
     <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F1xxxx\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_usb.h" />
     <ClInclude Include="..\Inc\adc.h" />
-    <ClInclude Include="..\Inc\crc.h" />
     <ClInclude Include="..\Inc\dataProcessing.h" />
     <ClInclude Include="..\Inc\dma.h" />
     <ClInclude Include="..\Inc\gpio.h" />
@@ -188,7 +187,6 @@
     <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F1xxxx\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_sdmmc.c" />
     <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F1xxxx\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_usb.c" />
     <ClCompile Include="..\Src\adc.c" />
-    <ClCompile Include="..\Src\crc.c" />
     <ClCompile Include="..\Src\dataProcessing.c" />
     <ClCompile Include="..\Src\dma.c" />
     <ClCompile Include="..\Src\gpio.c" />

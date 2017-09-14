@@ -39,7 +39,6 @@
 #include "main.h"
 #include "stm32f1xx_hal.h"
 #include "adc.h"
-#include "crc.h"
 #include "dma.h"
 #include "i2c.h"
 #include "iwdg.h"
@@ -106,7 +105,6 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_IWDG_Init();
-  MX_CRC_Init();
 
   /* USER CODE BEGIN 2 */
 
