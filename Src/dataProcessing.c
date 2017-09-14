@@ -2,6 +2,9 @@
 #include "modbusToAndroid.h"
 #include "adc.h"
 #include "usart.h"
+#include "i2c.h"
+
+
 
 static void backgroundMusic() {
 
@@ -200,123 +203,140 @@ static void gasCollect() {
 
 static void gasAlerm() {
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3)== GPIO_PIN_RESET) {
-		localData[3]= localData[3]|(1<<0);
+		localData[4]= localData[4]|(1<<0);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1<<0);
+		localData[4] = localData[4] & ~(1<<0);
 	}
 	
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1<<1);
+		localData[4] = localData[4] | (1<<1);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1<<1);
+		localData[4] = localData[4] & ~(1<<1);
 	}
 	
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 2);
+		localData[4] = localData[4] | (1 << 2);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 2);
+		localData[4] = localData[4] & ~(1 << 2);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 3);
+		localData[4] = localData[4] | (1 << 3);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 3);
+		localData[4] = localData[4] & ~(1 << 3);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 4);
+		localData[4] = localData[4] | (1 << 4);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 4);
+		localData[4] = localData[4] & ~(1 << 4);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 5);
+		localData[4] = localData[4] | (1 << 5);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 5);
+		localData[4] = localData[4] & ~(1 << 5);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 6);
+		localData[4] = localData[4] | (1 << 6);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 6);
+		localData[4] = localData[4] & ~(1 << 6);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 7);
+		localData[4] = localData[4] | (1 << 7);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 7);
+		localData[4] = localData[4] & ~(1 << 7);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 8);
+		localData[4] = localData[4] | (1 << 8);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 8);
+		localData[4] = localData[4] & ~(1 << 8);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 9);
+		localData[4] = localData[4] | (1 << 9);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 9);
+		localData[4] = localData[4] & ~(1 << 9);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 10);
+		localData[4] = localData[4] | (1 << 10);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 10);
+		localData[4] = localData[4] & ~(1 << 10);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_2) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 11);
+		localData[4] = localData[4] | (1 << 11);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 11);
+		localData[4] = localData[4] & ~(1 << 11);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_1) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 12);
+		localData[4] = localData[4] | (1 << 12);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 12);
+		localData[4] = localData[4] & ~(1 << 12);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_0) == GPIO_PIN_RESET) {
-		localData[3] = localData[3] | (1 << 13);
+		localData[4] = localData[4] | (1 << 13);
 	}
 	else
 	{
-		localData[3] = localData[3] & ~(1 << 13);
+		localData[4] = localData[4] & ~(1 << 13);
 	}
-	
 }
 
+static uint8_t SD2405_BCDtoDEC(uint8_t BCD_data)//change BCD_data to DEC_data
+{
+	uint8_t m_DEC_data[3];
+	m_DEC_data[0] = (BCD_data >> 4) & 0x0f;
+	m_DEC_data[1] = BCD_data & 0x0f;
+	m_DEC_data[2] = m_DEC_data[0] * 10 + m_DEC_data[1];
+	return m_DEC_data[2];
+}
+
+static void sendTime() {
+	static uint8_t timeTemp[7];
+	HAL_I2C_Mem_Read(&hi2c1, 0x64, 0, I2C_MEMADD_SIZE_8BIT , timeTemp , 7, 0xff);
+	for (uint8_t i = 0; i < 7; i++)
+	{
+		localData[13 + i] = SD2405_BCDtoDEC(timeTemp[i]);
+	}
+}
 
 void dataProcessing() {
 	backgroundMusic();
 	relayControl();
 	gasCollect();
 	gasAlerm();
+	sendTime();
 }

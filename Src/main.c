@@ -140,6 +140,7 @@ int main(void)
 			  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
 		  }
 	  }
+	  
   }
   /* USER CODE END 3 */
 

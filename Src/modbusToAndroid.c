@@ -39,7 +39,6 @@ void sendDataMaster03() {
 	txBuf[7] = (uint8_t)(temp >> 8);
 	txCount = 8;
 	HAL_UART_Transmit(&huart1, txBuf, txCount, 0xffff);
-	//HAL_UART_Transmit_DMA(&huart1, txBuf, txCount);
 }
 
 void sendDataMaster16() {
@@ -50,10 +49,10 @@ void sendDataMaster16() {
 	txBuf[0] = SlaveAdd;
 	txBuf[1] = 0x10;
 	txBuf[2] = 0x00;         //数据的起始地址；
-	txBuf[3] = 0x03;
+	txBuf[3] = 0x04;
 	txBuf[4] = 0x00;         //数据的个数；
-	txBuf[5] = 0x0a;
-	txBuf[6] = 0x14;         //数据的字节数；
+	txBuf[5] = 0x10;
+	txBuf[6] = 0x20;         //数据的字节数；
 	for (i = 0; i<txBuf[5]; i++) {
 		txBuf[7 + 2 * i] = (uint8_t)(localData[i+ txBuf[3]] >> 8);
 		txBuf[8 + 2 * i] = (uint8_t)(localData[i+ txBuf[3]] & 0xff);
@@ -72,23 +71,21 @@ void ModbusDecode(uint8_t *MDbuf, uint8_t len) {
 	uint16_t temp;
 
 	if (MDbuf[0] != SlaveAdd) return;								//地址相符时，再对本帧数据进行校验
+	if (MDbuf[1] != 0x03) return;									//检验功能码
 	crc = GetCRC16(MDbuf, len - 2);								//计算CRC校验值
 	crch = crc >> 8;
 	crcl = crc & 0xFF;
 	if ((MDbuf[len - 1] != crch) || (MDbuf[len - 2] != crcl)) return;	//如CRC校验不符时直接退出
-	if (MDbuf[1] != 0x03) return;									//检验功能码
-	if (MDbuf[2] > 0x20) return;					//寄存器地址支持0x0000～0x0020
 	for (uint8_t i = 0; i < MDbuf[2]/2; i++)
 	{
 		localData[i] = (uint16_t)(MDbuf[3 + 2*i] << 8) + MDbuf[4 + 2*i];
 	}
-	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_1);
 }
 
 void UsartRxMonitor() {
 	if (uart1_recv_end_flag)
 	{
-		
+		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_1);
 		ModbusDecode(Usart1ReceiveBuffer.BufferArray, Usart1ReceiveBuffer.BufferLen);
 		Usart1ReceiveBuffer.BufferLen = 0;
 		uart1_recv_end_flag = 0;
