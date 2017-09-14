@@ -1,5 +1,6 @@
 #include "modbusToAndroid.h"
 #include "usart.h"
+#include "crc.h"
 
 uint8_t SlaveAdd = 1;
 
@@ -35,6 +36,7 @@ void sendDataMaster03() {
 	txBuf[4] = 0x00;
 	txBuf[5] = 0x03;//¶Á6Î»
 	temp = GetCRC16(txBuf, 6);
+	//temp = HAL_CRC_Accumulate(&hcrc, (uint32_t)txBuf, 6);
 	txBuf[6] = (uint8_t)(temp & 0xff);
 	txBuf[7] = (uint8_t)(temp >> 8);
 	txCount = 8;
