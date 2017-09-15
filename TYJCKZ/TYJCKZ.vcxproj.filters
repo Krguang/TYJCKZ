@@ -2,55 +2,67 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source files">
-      <UniqueIdentifier>{cc31f2c8-97f7-4b9c-b8da-1942e87dbb83}</UniqueIdentifier>
+      <UniqueIdentifier>{714a7690-4a4a-48c4-9d9a-000f2d960722}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Header files">
-      <UniqueIdentifier>{7c3efdec-0b7c-4f95-99fa-484e933a416f}</UniqueIdentifier>
+      <UniqueIdentifier>{5764666f-c4da-4fee-93c8-1d0f0a15f78f}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
     <Filter Include="Resource files">
-      <UniqueIdentifier>{1e3c3058-89c9-4f41-b55d-017dc71da8e0}</UniqueIdentifier>
+      <UniqueIdentifier>{c7d729d7-8448-424b-bab4-2d5927433518}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
     <Filter Include="Source files\Inc">
-      <UniqueIdentifier>{6c427a46-95d7-4e3a-b232-2aab4b1abecc}</UniqueIdentifier>
+      <UniqueIdentifier>{49c23ed4-b2d9-4da7-922c-0fa41a827f84}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header files\Inc">
-      <UniqueIdentifier>{5e02244e-af0f-48fb-96b5-56638630d413}</UniqueIdentifier>
+      <UniqueIdentifier>{8f666926-8fe1-42ad-9f34-277b05faa899}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source files\Src">
-      <UniqueIdentifier>{4820c322-aa8b-4d44-ba8d-f71445308ff1}</UniqueIdentifier>
+      <UniqueIdentifier>{2b93540b-6e8f-4bb6-8fe4-a8989c0b6dba}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header files\Src">
-      <UniqueIdentifier>{e3987ad5-823f-43df-ba71-480519da407c}</UniqueIdentifier>
+      <UniqueIdentifier>{831027d3-3e47-4cf8-90d5-8a4050172a97}</UniqueIdentifier>
     </Filter>
     <Filter Include="Make files">
-      <UniqueIdentifier>{f14d29a3-b7e7-4864-ad2a-d931b935d049}</UniqueIdentifier>
+      <UniqueIdentifier>{6ccc73e0-b850-4a5a-9305-d6a4667aa5b8}</UniqueIdentifier>
       <Extensions>*.mak</Extensions>
     </Filter>
     <Filter Include="VisualGDB settings">
-      <UniqueIdentifier>{be0e5a0f-8f59-4aad-b063-8b860a0f487a}</UniqueIdentifier>
+      <UniqueIdentifier>{94f4f6ac-2de9-4e1e-9f6d-75b77c6f5c54}</UniqueIdentifier>
       <Extensions>*.vgdbsettings</Extensions>
     </Filter>
     <Filter Include="Source files\Device-specific files">
-      <UniqueIdentifier>{2df64400-a6b9-4480-9b51-99dbe18d7080}</UniqueIdentifier>
+      <UniqueIdentifier>{f543f816-67ac-4444-897c-23ecc76de526}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header files\Device-specific files">
-      <UniqueIdentifier>{f7b4e752-2e7e-4f17-8aa9-f4ee7ca1ad8f}</UniqueIdentifier>
+      <UniqueIdentifier>{a898ba51-cbe0-477f-afef-6e2a4907da55}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source files\Device-specific files\HAL">
-      <UniqueIdentifier>{3f45c6ff-cb9b-4034-a3af-0dfc1943b106}</UniqueIdentifier>
+      <UniqueIdentifier>{33c160d8-fe42-4f69-a63e-de194f8ec80e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header files\Device-specific files\HAL">
-      <UniqueIdentifier>{3b7d64c8-f4f7-4e1a-9abd-e8c2b1c63d78}</UniqueIdentifier>
+      <UniqueIdentifier>{5b5b5c25-8c15-483c-9d43-a3daa9167354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Device-specific files\FreeRTOS">
+      <UniqueIdentifier>{665be5ed-9a1d-445f-9479-40dab4afb663}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Device-specific files\FreeRTOS">
+      <UniqueIdentifier>{23283e24-96d5-4699-8641-cedce2e483fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Inc\adc.h">
       <Filter>Header files\Inc</Filter>
     </ClInclude>
+    <ClInclude Include="..\Inc\dataProcessing.h">
+      <Filter>Header files\Inc</Filter>
+    </ClInclude>
     <ClInclude Include="..\Inc\dma.h">
+      <Filter>Header files\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inc\FreeRTOSConfig.h">
       <Filter>Header files\Inc</Filter>
     </ClInclude>
     <ClInclude Include="..\Inc\gpio.h">
@@ -59,7 +71,13 @@
     <ClInclude Include="..\Inc\i2c.h">
       <Filter>Header files\Inc</Filter>
     </ClInclude>
+    <ClInclude Include="..\Inc\iwdg.h">
+      <Filter>Header files\Inc</Filter>
+    </ClInclude>
     <ClInclude Include="..\Inc\main.h">
+      <Filter>Header files\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inc\modbusToAndroid.h">
       <Filter>Header files\Inc</Filter>
     </ClInclude>
     <ClInclude Include="..\Inc\stm32f1xx_hal_conf.h">
@@ -269,21 +287,66 @@
     <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F1xxxx\CMSIS_HAL\RTOS\Template\cmsis_os.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\Inc\iwdg.h">
-      <Filter>Header files\Inc</Filter>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
     </ClInclude>
-    <ClInclude Include="..\Inc\dataProcessing.h">
-      <Filter>Header files\Inc</Filter>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\croutine.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
     </ClInclude>
-    <ClInclude Include="..\Inc\modbusToAndroid.h">
-      <Filter>Header files\Inc</Filter>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\deprecated_definitions.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\event_groups.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\FreeRTOS.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\list.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\mpu_prototypes.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\mpu_wrappers.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\portable.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\projdefs.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\queue.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\semphr.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\StackMacros.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\task.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\include\timers.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\portable\GCC\ARM_CM3\portmacro.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Src\adc.c">
       <Filter>Source files\Src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Src\dataProcessing.c">
+      <Filter>Source files\Src</Filter>
+    </ClCompile>
     <ClCompile Include="..\Src\dma.c">
+      <Filter>Source files\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\freertos.c">
       <Filter>Source files\Src</Filter>
     </ClCompile>
     <ClCompile Include="..\Src\gpio.c">
@@ -292,10 +355,19 @@
     <ClCompile Include="..\Src\i2c.c">
       <Filter>Source files\Src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Src\iwdg.c">
+      <Filter>Source files\Src</Filter>
+    </ClCompile>
     <ClCompile Include="..\Src\main.c">
       <Filter>Source files\Src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Src\modbusToAndroid.c">
+      <Filter>Source files\Src</Filter>
+    </ClCompile>
     <ClCompile Include="..\Src\stm32f1xx_hal_msp.c">
+      <Filter>Source files\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\stm32f1xx_hal_timebase_TIM.c">
       <Filter>Source files\Src</Filter>
     </ClCompile>
     <ClCompile Include="..\Src\stm32f1xx_it.c">
@@ -442,14 +514,32 @@
     <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F1xxxx\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_usb.c">
       <Filter>Source files\Device-specific files\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\Src\iwdg.c">
-      <Filter>Source files\Src</Filter>
+    <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\croutine.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
     </ClCompile>
-    <ClCompile Include="..\Src\dataProcessing.c">
-      <Filter>Source files\Src</Filter>
+    <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\event_groups.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
     </ClCompile>
-    <ClCompile Include="..\Src\modbusToAndroid.c">
-      <Filter>Source files\Src</Filter>
+    <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\list.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\queue.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\tasks.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\timers.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\portable\GCC\ARM_CM3\port.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\portable\MemMang\heap_4.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -474,5 +564,16 @@
     <Xml Include="stm32.xml">
       <Filter>VisualGDB settings</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\License\license.txt">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </Text>
+    <Text Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\readme.txt">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </Text>
+    <Text Include="..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\FreeRTOS\Source\st_readme.txt">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </Text>
   </ItemGroup>
 </Project>
