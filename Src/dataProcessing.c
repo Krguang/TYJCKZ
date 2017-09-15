@@ -203,115 +203,115 @@ static void gasCollect() {
 
 static void gasAlerm() {
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3)== GPIO_PIN_RESET) {
-		localData[4]= localData[4]|(1<<0);
+		localData[4] |= (1<<0);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1<<0);
+		localData[4] &= ~(1<<0);
 	}
 	
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1<<1);
+		localData[4] |= (1<<1);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1<<1);
+		localData[4] &= ~(1<<1);
 	}
 	
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 2);
+		localData[4] |= (1 << 2);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 2);
+		localData[4] &= ~(1 << 2);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 3);
+		localData[4] |= (1 << 3);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 3);
+		localData[4] &= ~(1 << 3);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 4);
+		localData[4] |= (1 << 4);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 4);
+		localData[4] &= ~(1 << 4);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 5);
+		localData[4] |= (1 << 5);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 5);
+		localData[4] &= ~(1 << 5);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 6);
+		localData[4] |= (1 << 6);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 6);
+		localData[4] &= ~(1 << 6);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 7);
+		localData[4] |= (1 << 7);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 7);
+		localData[4] &~(1 << 7);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 8);
+		localData[4] |= (1 << 8);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 8);
+		localData[4] &= ~(1 << 8);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 9);
+		localData[4] |= (1 << 9);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 9);
+		localData[4] &= ~(1 << 9);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 10);
+		localData[4] |= (1 << 10);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 10);
+		localData[4] &= ~(1 << 10);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_2) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 11);
+		localData[4] |= (1 << 11);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 11);
+		localData[4] &= ~(1 << 11);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_1) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 12);
+		localData[4] |= (1 << 12);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 12);
+		localData[4] &= ~(1 << 12);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_0) == GPIO_PIN_RESET) {
-		localData[4] = localData[4] | (1 << 13);
+		localData[4] |= (1 << 13);
 	}
 	else
 	{
-		localData[4] = localData[4] & ~(1 << 13);
+		localData[4] &= ~(1 << 13);
 	}
 }
 
@@ -329,7 +329,19 @@ static void sendTime() {
 	HAL_I2C_Mem_Read(&hi2c1, 0x64, 0, I2C_MEMADD_SIZE_8BIT , timeTemp , 7, 0xff);
 	for (uint8_t i = 0; i < 7; i++)
 	{
+		if (i==2)//小时数据去除前3位，保留真实数据
+		{
+			timeTemp[2] &= 0x3f;
+		}
 		localData[13 + i] = SD2405_BCDtoDEC(timeTemp[i]);
+	}
+}
+
+static void telDial() {
+
+	if (localData[3]&(1<<0))
+	{
+
 	}
 }
 
