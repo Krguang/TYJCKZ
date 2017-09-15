@@ -155,6 +155,7 @@
     <ClInclude Include="..\Inc\modbusToAndroid.h" />
     <ClInclude Include="..\Inc\stm32f1xx_hal_conf.h" />
     <ClInclude Include="..\Inc\stm32f1xx_it.h" />
+    <ClInclude Include="..\Inc\telDial.h" />
     <ClInclude Include="..\Inc\tim.h" />
     <ClInclude Include="..\Inc\usart.h" />
   </ItemGroup>
@@ -225,6 +226,7 @@
     <ClCompile Include="..\Src\stm32f1xx_hal_timebase_TIM.c" />
     <ClCompile Include="..\Src\stm32f1xx_it.c" />
     <ClCompile Include="..\Src\system_stm32f1xx.c" />
+    <ClCompile Include="..\Src\telDial.c" />
     <ClCompile Include="..\Src\tim.c" />
     <ClCompile Include="..\Src\usart.c" />
   </ItemGroup>

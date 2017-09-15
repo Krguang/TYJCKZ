@@ -337,14 +337,6 @@ static void sendTime() {
 	}
 }
 
-static void telDial() {
-
-	if (localData[3]&(1<<0))
-	{
-
-	}
-}
-
 void dataProcessing() {
 	backgroundMusic();
 	relayControl();
