@@ -61,6 +61,7 @@
 osThreadId TaskModbusRecHandle;
 osThreadId TaskDataProcHandle;
 osThreadId TaskModbusSendHandle;
+osThreadId TaskTelDialHandle;
 
 /* USER CODE BEGIN Variables */
 
@@ -70,6 +71,7 @@ osThreadId TaskModbusSendHandle;
 void FuncModbusRec(void const * argument);
 void FuncDataProc(void const * argument);
 void FuncModbusSend(void const * argument);
+void FuncTelDial(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -110,6 +112,10 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of TaskModbusSend */
   osThreadDef(TaskModbusSend, FuncModbusSend, osPriorityNormal, 0, 128);
   TaskModbusSendHandle = osThreadCreate(osThread(TaskModbusSend), NULL);
+
+  /* definition and creation of TaskTelDial */
+  osThreadDef(TaskTelDial, FuncTelDial, osPriorityNormal, 0, 128);
+  TaskTelDialHandle = osThreadCreate(osThread(TaskTelDial), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -161,6 +167,18 @@ void FuncModbusSend(void const * argument)
 	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
   }
   /* USER CODE END FuncModbusSend */
+}
+
+/* FuncTelDial function */
+void FuncTelDial(void const * argument)
+{
+  /* USER CODE BEGIN FuncTelDial */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END FuncTelDial */
 }
 
 /* USER CODE BEGIN Application */
