@@ -201,6 +201,30 @@
 			<type>1</type>
 			<location>C:/Users/K/STM32Cube/Repository/STM32Cube_FW_F1_V1.6.0/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c</location>
 		</link><link>
+			
+			<type>2</type>
+			
+		</link><link>
+			
+			<type>2</type>
+			
+		</link><link>
+			
+			<type>2</type>
+			
+		</link><link>
+			
+			<type>2</type>
+			
+		</link><link>
+			
+			<type>2</type>
+			
+		</link><link>
+			<name>Middlewares/FreeRTOS/heap_5.c</name>
+			<type>1</type>
+			<location>C:/Users/K/STM32Cube/Repository/STM32Cube_FW_F1_V1.6.0/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_5.c</location>
+		</link><link>
 			<name>Application/TrueSTUDIO</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -220,9 +244,5 @@
 			<name>Drivers/CMSIS</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
-		</link><link>
-			<name>Middlewares/FreeRTOS/heap_5.c</name>
-			<type>1</type>
-			<location>C:/Users/K/STM32Cube/Repository/STM32Cube_FW_F1_V1.6.0/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_5.c</location>
 		</link></linkedResources>
 </projectDescription>

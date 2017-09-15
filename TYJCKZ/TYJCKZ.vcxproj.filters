@@ -86,9 +86,6 @@
     <ClInclude Include="..\Inc\stm32f1xx_it.h">
       <Filter>Header files\Inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\Inc\tim.h">
-      <Filter>Header files\Inc</Filter>
-    </ClInclude>
     <ClInclude Include="..\Inc\usart.h">
       <Filter>Header files\Inc</Filter>
     </ClInclude>
@@ -377,9 +374,6 @@
       <Filter>Source files\Src</Filter>
     </ClCompile>
     <ClCompile Include="..\Src\system_stm32f1xx.c">
-      <Filter>Source files\Src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Src\tim.c">
       <Filter>Source files\Src</Filter>
     </ClCompile>
     <ClCompile Include="..\Src\usart.c">

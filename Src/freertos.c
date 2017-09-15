@@ -62,6 +62,7 @@ osThreadId TaskModbusRecHandle;
 osThreadId TaskDataProcHandle;
 osThreadId TaskModbusSendHandle;
 osThreadId TaskTelDialHandle;
+osThreadId TaskGasRxTxHandle;
 
 /* USER CODE BEGIN Variables */
 
@@ -72,6 +73,7 @@ void FuncModbusRec(void const * argument);
 void FuncDataProc(void const * argument);
 void FuncModbusSend(void const * argument);
 void FuncTelDial(void const * argument);
+void FuncGasRxTx(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -116,6 +118,10 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of TaskTelDial */
   osThreadDef(TaskTelDial, FuncTelDial, osPriorityNormal, 0, 128);
   TaskTelDialHandle = osThreadCreate(osThread(TaskTelDial), NULL);
+
+  /* definition and creation of TaskGasRxTx */
+  osThreadDef(TaskGasRxTx, FuncGasRxTx, osPriorityNormal, 0, 128);
+  TaskGasRxTxHandle = osThreadCreate(osThread(TaskGasRxTx), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -179,6 +185,18 @@ void FuncTelDial(void const * argument)
     osDelay(1);
   }
   /* USER CODE END FuncTelDial */
+}
+
+/* FuncGasRxTx function */
+void FuncGasRxTx(void const * argument)
+{
+  /* USER CODE BEGIN FuncGasRxTx */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END FuncGasRxTx */
 }
 
 /* USER CODE BEGIN Application */

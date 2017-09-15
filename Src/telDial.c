@@ -44,6 +44,14 @@ void telDial() {
 	static uint8_t telSwitch = 0;
 	static uint8_t keyStatusFlag[11];
 
+	if (localData[3]&(1<<13))
+	{
+		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET);
+	}
+
 	if (localData[3]&(1<<12))
 	{
 		if (telSwitch==0)
@@ -64,8 +72,8 @@ void telDial() {
 			if (keyStatusFlag[0]==0)
 			{
 				sendOneBit(0x0a);
+				keyStatusFlag[0] = 1;
 			}
-			keyStatusFlag[0] = 1;
 		}
 		else
 		{
@@ -76,8 +84,8 @@ void telDial() {
 			if (keyStatusFlag[1] == 0)
 			{
 				sendOneBit(1);
+				keyStatusFlag[1] = 1;
 			}
-			keyStatusFlag[1] = 1;
 		}
 		else
 		{
@@ -88,8 +96,8 @@ void telDial() {
 			if (keyStatusFlag[2] == 0)
 			{
 				sendOneBit(2);
-			}
-			keyStatusFlag[2] = 1;
+				keyStatusFlag[2] = 1;
+			}	
 		}
 		else
 		{
@@ -100,8 +108,8 @@ void telDial() {
 			if (keyStatusFlag[3] == 0)
 			{
 				sendOneBit(3);
+				keyStatusFlag[3] = 1;
 			}
-			keyStatusFlag[3] = 1;
 		}
 		else
 		{
@@ -112,8 +120,8 @@ void telDial() {
 			if (keyStatusFlag[4] == 0)
 			{
 				sendOneBit(4);
+				keyStatusFlag[4] = 1;
 			}
-			keyStatusFlag[4] = 1;
 		}
 		else
 		{
@@ -124,8 +132,8 @@ void telDial() {
 			if (keyStatusFlag[5] == 0)
 			{
 				sendOneBit(5);
+				keyStatusFlag[5] = 1;
 			}
-			keyStatusFlag[5] = 1;
 		}
 		else
 		{
@@ -136,8 +144,8 @@ void telDial() {
 			if (keyStatusFlag[6] == 0)
 			{
 				sendOneBit(6);
+				keyStatusFlag[6] = 1;
 			}
-			keyStatusFlag[6] = 1;
 		}
 		else
 		{
@@ -148,8 +156,8 @@ void telDial() {
 			if (keyStatusFlag[7] == 0)
 			{
 				sendOneBit(7);
-			}
-			keyStatusFlag[7] = 1;
+				keyStatusFlag[7] = 1;
+			}	
 		}
 		else
 		{
@@ -160,8 +168,8 @@ void telDial() {
 			if (keyStatusFlag[8] == 0)
 			{
 				sendOneBit(8);
-			}
-			keyStatusFlag[8] = 1;
+				keyStatusFlag[8] = 1;
+			}	
 		}
 		else
 		{
@@ -172,8 +180,8 @@ void telDial() {
 			if (keyStatusFlag[9] == 0)
 			{
 				sendOneBit(9);
+				keyStatusFlag[9] = 1;
 			}
-			keyStatusFlag[9] = 1;
 		}
 		else
 		{
@@ -184,8 +192,8 @@ void telDial() {
 			if (keyStatusFlag[10] == 0)
 			{
 				sendOneBit(0x0b);
+				keyStatusFlag[10] = 1;
 			}
-			keyStatusFlag[10] = 1;
 		}
 		else
 		{
@@ -196,14 +204,12 @@ void telDial() {
 			if (keyStatusFlag[11] == 0)
 			{
 				sendOneBit(0x0c);
+				keyStatusFlag[11] = 1;
 			}
-			keyStatusFlag[11] = 1;
 		}
 		else
 		{
 			keyStatusFlag[11] = 0;
 		}
-		
 	}
-
 }

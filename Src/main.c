@@ -53,7 +53,6 @@
 #include "dma.h"
 #include "i2c.h"
 #include "iwdg.h"
-#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -112,8 +111,6 @@ int main(void)
   MX_DMA_Init();
   MX_ADC1_Init();
   MX_I2C1_Init();
-  MX_TIM6_Init();
-  MX_TIM7_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_IWDG_Init();
@@ -126,7 +123,7 @@ int main(void)
   HAL_ADCEx_Calibration_Start(&hadc1);
   HAL_ADC_Start_DMA(&hadc1, ADC_ConvertedValue, 7);
 
-  HAL_TIM_Base_Start_IT(&htim6);
+  //HAL_TIM_Base_Start_IT(&htim6);
 
 
   /* USER CODE END 2 */
