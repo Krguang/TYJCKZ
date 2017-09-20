@@ -306,6 +306,7 @@ void USART1_IRQHandler(void)
 		Usart1ReceiveBuffer.BufferLen = BUFFER_SIZE - temp;
 		uart1_recv_end_flag = 1;
 		HAL_UART_Receive_DMA(&huart1, Usart1ReceiveBuffer.BufferArray, BUFFER_SIZE);
+		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_1);
 	}
 }
 

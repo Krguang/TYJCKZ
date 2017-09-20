@@ -148,6 +148,7 @@
     <ClInclude Include="..\Inc\dataProcessing.h" />
     <ClInclude Include="..\Inc\dma.h" />
     <ClInclude Include="..\Inc\FreeRTOSConfig.h" />
+    <ClInclude Include="..\Inc\gasAlermRxTx.h" />
     <ClInclude Include="..\Inc\gpio.h" />
     <ClInclude Include="..\Inc\i2c.h" />
     <ClInclude Include="..\Inc\iwdg.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="..\Src\dataProcessing.c" />
     <ClCompile Include="..\Src\dma.c" />
     <ClCompile Include="..\Src\freertos.c" />
+    <ClCompile Include="..\Src\gasAlermRxTx.c" />
     <ClCompile Include="..\Src\gpio.c" />
     <ClCompile Include="..\Src\i2c.c" />
     <ClCompile Include="..\Src\iwdg.c" />

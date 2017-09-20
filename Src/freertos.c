@@ -55,6 +55,7 @@
 #include "stm32f1xx_hal.h"
 #include "modbusToAndroid.h"
 #include "dataProcessing.h"
+#include "telDial.h"
 /* USER CODE END Includes */
 
 /* Variables -----------------------------------------------------------------*/
@@ -141,7 +142,7 @@ void FuncModbusRec(void const * argument)
   for(;;)
   {
 	  UsartRxMonitor();
-	  osDelay(10);
+	  osDelay(1);
   }
   /* USER CODE END FuncModbusRec */
 }
@@ -154,7 +155,8 @@ void FuncDataProc(void const * argument)
   for(;;)
   {
 	  dataProcessing();
-	  osDelay(10);
+	  telDial();
+	  osDelay(1);
   }
   /* USER CODE END FuncDataProc */
 }
@@ -182,7 +184,7 @@ void FuncTelDial(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  osDelay(100);
   }
   /* USER CODE END FuncTelDial */
 }
@@ -194,7 +196,7 @@ void FuncGasRxTx(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(100);
   }
   /* USER CODE END FuncGasRxTx */
 }

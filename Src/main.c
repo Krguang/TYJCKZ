@@ -123,9 +123,6 @@ int main(void)
   HAL_ADCEx_Calibration_Start(&hadc1);
   HAL_ADC_Start_DMA(&hadc1, ADC_ConvertedValue, 7);
 
-  //HAL_TIM_Base_Start_IT(&htim6);
-
-
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

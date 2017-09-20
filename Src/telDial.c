@@ -12,6 +12,8 @@
 #define HT9200_CLK_LOW		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_7,GPIO_PIN_RESET)
 #define HT9200_CLK_HIGH		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_7,GPIO_PIN_SET)
 
+uint8_t telSwitch = 0;
+uint8_t keyStatusFlag[11];
 
 static void sendOneBit(unsigned char dtmfData) {
 	
@@ -39,10 +41,8 @@ static void sendOneBit(unsigned char dtmfData) {
 	HT9200_CE_HIGH;
 }
 
-void telDial() {
 
-	static uint8_t telSwitch = 0;
-	static uint8_t keyStatusFlag[11];
+void telDial() {
 
 	if (localData[3]&(1<<13))
 	{
@@ -54,6 +54,7 @@ void telDial() {
 
 	if (localData[3]&(1<<12))
 	{
+		/*
 		if (telSwitch==0)
 		{
 			telSwitch = 1;
@@ -64,6 +65,14 @@ void telDial() {
 			telSwitch = 0;
 			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9, GPIO_PIN_RESET);
 		}
+		*/
+		telSwitch = 1;
+		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9, GPIO_PIN_SET);
+	}
+	else
+	{
+		telSwitch = 0;
+		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9, GPIO_PIN_RESET);
 	}
 
 	if (telSwitch)

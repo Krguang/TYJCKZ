@@ -33,7 +33,7 @@ void sendDataMaster03() {
 	txBuf[2] = 0x00;
 	txBuf[3] = 0x00;
 	txBuf[4] = 0x00;
-	txBuf[5] = 0x03;//¶Á6Î»
+	txBuf[5] = 0x04;//¶Á4Î»
 	temp = GetCRC16(txBuf, 6);
 	txBuf[6] = (uint8_t)(temp & 0xff);
 	txBuf[7] = (uint8_t)(temp >> 8);
@@ -80,12 +80,13 @@ void ModbusDecode(uint8_t *MDbuf, uint8_t len) {
 	{
 		localData[i] = (uint16_t)(MDbuf[3 + 2*i] << 8) + MDbuf[4 + 2*i];
 	}
+	
 }
 
 void UsartRxMonitor() {
 	if (uart1_recv_end_flag)
 	{
-		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_1);
+		
 		ModbusDecode(Usart1ReceiveBuffer.BufferArray, Usart1ReceiveBuffer.BufferLen);
 		Usart1ReceiveBuffer.BufferLen = 0;
 		uart1_recv_end_flag = 0;

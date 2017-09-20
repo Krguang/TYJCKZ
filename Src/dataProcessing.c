@@ -263,7 +263,7 @@ static void gasAlerm() {
 	}
 	else
 	{
-		localData[4] &~(1 << 7);
+		localData[4] &= ~(1 << 7);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5) == GPIO_PIN_RESET) {
