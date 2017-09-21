@@ -13,6 +13,9 @@ uint16_t gasRxTxTemp[50];
 uint8_t gasTxBuf[50];
 uint8_t gasTxCount;
 
+uint8_t gasSensorSwitch = 1;//作为气体从站时,需要关闭气体传感器的输入.
+
+
 static uint16_t GetCRC16(uint8_t *arr_buff, uint8_t len) {  //CRC校验程序
 	uint16_t crc = 0xFFFF;
 	uint8_t i, j;
@@ -36,13 +39,12 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 	unsigned char cnt;
 	unsigned int  crc;
 	unsigned char crch, crcl;
-
+	
 	if (MDbuf[0] != gasRxAdd) return;								//地址相符时，再对本帧数据进行校验
 	crc = GetCRC16(MDbuf, len - 2);								//计算CRC校验值
 	crch = crc >> 8;
 	crcl = crc & 0xFF;
 	if ((MDbuf[len - 1] != crch) || (MDbuf[len - 2] != crcl)) return;	//如CRC校验不符时直接退出
-
 	switch (MDbuf[1]) {											//地址和校验字均相符后，解析功能码，执行相关操作
 /*
 	case 0x03:											//读取一个或连续的寄存器
@@ -91,6 +93,10 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 			}
 
 			len = 6;			//保留6帧重新计算CRC并返回原帧
+			for (uint8_t i = 4; i < 13; i++)
+			{
+				localData[i] = gasRxTxTemp[i];
+			}
 		}
 		else {					//寄存器地址不被支持时，返回错误码{
 			MDbuf[1] = 0x86;	//功能码最高位置1
@@ -104,16 +110,12 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 		MDbuf[2] = 0x01;		//设置异常码为01-无效功能
 		len = 3;
 		break;
-		for (uint8_t i = 4; i < 13; i++)
-		{
-			localData[i] = gasRxTxTemp[i];
-		}
 	
 	}
 	crc = GetCRC16(MDbuf, len);		//计算返回帧的CRC校验值
 	MDbuf[len++] = crc & 0xFF;		//CRC低字节
 	MDbuf[len++] = crc >> 8;		//CRC高字节
-	HAL_UART_Transmit(&huart1, MDbuf, len, 1000);	//发送返回帧	
+	HAL_UART_Transmit(&huart2, MDbuf, len, 1000);	//发送返回帧	
 
 }
 
@@ -151,7 +153,8 @@ static void gasAlermTx() {
 }
 
 static void gasAlermRx() {
-	if (uart1_recv_end_flag)
+	
+	if (uart2_recv_end_flag)
 	{
 		ModbusDecode(Usart2ReceiveBuffer.BufferArray, Usart2ReceiveBuffer.BufferLen);
 		Usart2ReceiveBuffer.BufferLen = 0;
@@ -160,12 +163,17 @@ static void gasAlermRx() {
 }
 
 void gasAlermRxTx() {
+
+	
+
 	if (HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_4) == GPIO_PIN_SET)
 	{
 		gasAlermTx();
+		gasSensorSwitch = 1;
 	}
 	else
 	{
 		gasAlermRx();
+		gasSensorSwitch = 0;
 	}
 }

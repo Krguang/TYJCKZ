@@ -3,7 +3,7 @@
 #include "adc.h"
 #include "usart.h"
 #include "i2c.h"
-
+#include "gasAlermRxTx.h"
 
 
 static void backgroundMusic() {
@@ -340,7 +340,10 @@ static void sendTime() {
 void dataProcessing() {
 	backgroundMusic();
 	relayControl();
-	gasCollect();
-	gasAlerm();
 	sendTime();
+	if (gasSensorSwitch==1)
+	{
+		gasCollect();
+		gasAlerm();
+	}
 }

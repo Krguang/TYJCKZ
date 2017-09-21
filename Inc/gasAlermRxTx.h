@@ -5,5 +5,6 @@
 #include "main.h"
 
 void gasAlermRxTx();
+extern uint8_t gasSensorSwitch;
 
 #endif // !__GASALERMRXTX_
