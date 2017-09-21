@@ -1,7 +1,7 @@
 #include "modbusToAndroid.h"
 #include "usart.h"
 
-uint8_t SlaveAdd = 1;
+uint8_t M2ASlaveAdd = 1;
 
 uint8_t txBuf[50];
 uint8_t txCount = 0;
@@ -9,7 +9,7 @@ uint8_t txCount = 0;
 uint16_t localData[50];
 
 
-uint16_t GetCRC16(uint8_t *arr_buff, uint8_t len) {  //CRC校验程序
+static uint16_t GetCRC16(uint8_t *arr_buff, uint8_t len) {  //CRC校验程序
 	uint16_t crc = 0xFFFF;
 	uint8_t i, j;
 	for (j = 0; j < len; j++) {
@@ -28,7 +28,7 @@ uint16_t GetCRC16(uint8_t *arr_buff, uint8_t len) {  //CRC校验程序
 
 void sendDataMaster03() {
 	uint16_t temp;
-	txBuf[0] = SlaveAdd;
+	txBuf[0] = M2ASlaveAdd;
 	txBuf[1] = 0x03;
 	txBuf[2] = 0x00;
 	txBuf[3] = 0x00;
@@ -46,7 +46,7 @@ void sendDataMaster16() {
 	uint16_t temp;
 	uint8_t i;
 
-	txBuf[0] = SlaveAdd;
+	txBuf[0] = M2ASlaveAdd;
 	txBuf[1] = 0x10;
 	txBuf[2] = 0x00;         //数据的起始地址；
 	txBuf[3] = 0x04;
@@ -64,13 +64,13 @@ void sendDataMaster16() {
 	HAL_UART_Transmit(&huart1, txBuf, txCount, 0xffff);
 }
 
-void ModbusDecode(uint8_t *MDbuf, uint8_t len) {
+static void ModbusDecode(uint8_t *MDbuf, uint8_t len) {
 
 	uint16_t  crc;
 	uint8_t crch, crcl;
 	uint16_t temp;
 
-	if (MDbuf[0] != SlaveAdd) return;								//地址相符时，再对本帧数据进行校验
+	if (MDbuf[0] != M2ASlaveAdd) return;								//地址相符时，再对本帧数据进行校验
 	if (MDbuf[1] != 0x03) return;									//检验功能码
 	crc = GetCRC16(MDbuf, len - 2);								//计算CRC校验值
 	crch = crc >> 8;
@@ -80,10 +80,9 @@ void ModbusDecode(uint8_t *MDbuf, uint8_t len) {
 	{
 		localData[i] = (uint16_t)(MDbuf[3 + 2*i] << 8) + MDbuf[4 + 2*i];
 	}
-	
 }
 
-void UsartRxMonitor() {
+void Usart1RxMonitor() {
 	if (uart1_recv_end_flag)
 	{
 		

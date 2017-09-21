@@ -56,6 +56,7 @@
 #include "modbusToAndroid.h"
 #include "dataProcessing.h"
 #include "telDial.h"
+#include "gasAlermRxTx.h"
 /* USER CODE END Includes */
 
 /* Variables -----------------------------------------------------------------*/
@@ -141,7 +142,7 @@ void FuncModbusRec(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-	  UsartRxMonitor();
+	  Usart1RxMonitor();
 	  osDelay(1);
   }
   /* USER CODE END FuncModbusRec */
@@ -196,7 +197,8 @@ void FuncGasRxTx(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(100);
+	 gasAlermRxTx();
+	 osDelay(1);
   }
   /* USER CODE END FuncGasRxTx */
 }

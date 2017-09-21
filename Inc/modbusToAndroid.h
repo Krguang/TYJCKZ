@@ -6,7 +6,7 @@
 
 extern unsigned short localData[];
 
-void UsartRxMonitor();
+void Usart1RxMonitor();
 void sendDataMaster03();
 void sendDataMaster16();
 
