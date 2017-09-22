@@ -140,6 +140,7 @@ static void gasTxCommand16(uint8_t slaveAdd) {
 	gasTxBuf[8 + 2 * gasTxBuf[5]] = (uint8_t)((temp >> 8) & 0xff);
 	gasTxCount = 9 + 2 * gasTxBuf[5];
 	HAL_UART_Transmit(&huart2, gasTxBuf, gasTxCount, 0xffff);
+	//HAL_UART_Transmit_DMA(&huart2, gasTxBuf, gasTxCount);
 }
 
 static void gasAlermTx() {
