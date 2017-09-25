@@ -44,7 +44,7 @@ static void sendOneBit(unsigned char dtmfData) {
 
 void telDial() {
 
-	if (localData[3]&(1<<13))
+	if (localData[2]&(1<<13))
 	{
 		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET);
 	}
@@ -52,7 +52,7 @@ void telDial() {
 		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET);
 	}
 
-	if (localData[3]&(1<<12))
+	if (localData[2]&(1<<12))
 	{
 		/*
 		if (telSwitch==0)
@@ -77,7 +77,7 @@ void telDial() {
 
 	if (telSwitch)
 	{
-		if (localData[3] & (1 << 0)) {
+		if (localData[2] & (1 << 0)) {
 			if (keyStatusFlag[0]==0)
 			{
 				sendOneBit(0x0a);
@@ -89,7 +89,7 @@ void telDial() {
 			keyStatusFlag[0] = 0;
 		}
 
-		if (localData[3] & (1 << 1)) {
+		if (localData[2] & (1 << 1)) {
 			if (keyStatusFlag[1] == 0)
 			{
 				sendOneBit(1);
@@ -101,7 +101,7 @@ void telDial() {
 			keyStatusFlag[1] = 0;
 		}
 
-		if (localData[3] & (1 << 2)) {
+		if (localData[2] & (1 << 2)) {
 			if (keyStatusFlag[2] == 0)
 			{
 				sendOneBit(2);
@@ -113,7 +113,7 @@ void telDial() {
 			keyStatusFlag[2] = 0;
 		}
 
-		if (localData[3] & (1 << 3)) {
+		if (localData[2] & (1 << 3)) {
 			if (keyStatusFlag[3] == 0)
 			{
 				sendOneBit(3);
@@ -125,7 +125,7 @@ void telDial() {
 			keyStatusFlag[3] = 0;
 		}
 
-		if (localData[3] & (1 << 4)) {
+		if (localData[2] & (1 << 4)) {
 			if (keyStatusFlag[4] == 0)
 			{
 				sendOneBit(4);
@@ -137,7 +137,7 @@ void telDial() {
 			keyStatusFlag[4] = 0;
 		}
 
-		if (localData[3] & (1 << 5)) {
+		if (localData[2] & (1 << 5)) {
 			if (keyStatusFlag[5] == 0)
 			{
 				sendOneBit(5);
@@ -149,7 +149,7 @@ void telDial() {
 			keyStatusFlag[5] = 0;
 		}
 
-		if (localData[3] & (1 << 6)) {
+		if (localData[2] & (1 << 6)) {
 			if (keyStatusFlag[6] == 0)
 			{
 				sendOneBit(6);
@@ -161,7 +161,7 @@ void telDial() {
 			keyStatusFlag[6] = 0;
 		}
 
-		if (localData[3] & (1 << 7)) {
+		if (localData[2] & (1 << 7)) {
 			if (keyStatusFlag[7] == 0)
 			{
 				sendOneBit(7);
@@ -173,7 +173,7 @@ void telDial() {
 			keyStatusFlag[7] = 0;
 		}
 
-		if (localData[3] & (1 << 8)) {
+		if (localData[2] & (1 << 8)) {
 			if (keyStatusFlag[8] == 0)
 			{
 				sendOneBit(8);
@@ -185,7 +185,7 @@ void telDial() {
 			keyStatusFlag[8] = 0;
 		}
 
-		if (localData[3] & (1 << 9)) {
+		if (localData[2] & (1 << 9)) {
 			if (keyStatusFlag[9] == 0)
 			{
 				sendOneBit(9);
@@ -197,7 +197,7 @@ void telDial() {
 			keyStatusFlag[9] = 0;
 		}
 
-		if (localData[3] & (1 << 10)) {
+		if (localData[2] & (1 << 10)) {
 			if (keyStatusFlag[10] == 0)
 			{
 				sendOneBit(0x0b);
@@ -209,7 +209,7 @@ void telDial() {
 			keyStatusFlag[10] = 0;
 		}
 
-		if (localData[3] & (1 << 11)) {
+		if (localData[2] & (1 << 11)) {
 			if (keyStatusFlag[11] == 0)
 			{
 				sendOneBit(0x0c);
