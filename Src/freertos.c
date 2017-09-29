@@ -173,6 +173,7 @@ void FuncModbusSend(void const * argument)
 	  osDelay(100);
 	  sendDataMaster16();
 	  osDelay(100);
+	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_11);
   }
   /* USER CODE END FuncModbusSend */
 }

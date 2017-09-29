@@ -203,19 +203,19 @@ static void gasCollect() {
 
 static void gasAlerm() {
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3)== GPIO_PIN_RESET) {
-		localData[3] |= (1<<0);
+		localData[3] |= (1 << 0);
 	}
 	else
 	{
-		localData[3] &= ~(1<<0);
+		localData[3] &= ~(1 << 0);
 	}
 	
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2) == GPIO_PIN_RESET) {
-		localData[3] |= (1<<1);
+		localData[3] |= (1 << 1);
 	}
 	else
 	{
-		localData[3] &= ~(1<<1);
+		localData[3] &= ~(1 << 1);
 	}
 	
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_RESET) {
@@ -314,6 +314,7 @@ static void gasAlerm() {
 		localData[3] &= ~(1 << 13);
 	}
 }
+
 /*
 static uint8_t SD2405_BCDtoDEC(uint8_t BCD_data)//change BCD_data to DEC_data
 {

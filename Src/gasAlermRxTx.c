@@ -40,7 +40,7 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 	unsigned int  crc;
 	unsigned char crch, crcl;
 	
-	if (MDbuf[0] != gasRxAdd) return;								//地址相符时，再对本帧数据进行校验
+	if ((MDbuf[0] != gasRxAdd)&&(MDbuf[0]!=0)) return;								//地址相符时，再对本帧数据进行校验
 	crc = GetCRC16(MDbuf, len - 2);								//计算CRC校验值
 	crch = crc >> 8;
 	crcl = crc & 0xFF;
@@ -93,7 +93,7 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 			}
 
 			len = 6;			//保留6帧重新计算CRC并返回原帧
-			for (uint8_t i = 4; i < 13; i++)
+			for (uint8_t i = 3; i < 12; i++)
 			{
 				localData[i] = gasRxTxTemp[i];
 			}
@@ -110,12 +110,15 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 		MDbuf[2] = 0x01;		//设置异常码为01-无效功能
 		len = 3;
 		break;
-	
 	}
 	crc = GetCRC16(MDbuf, len);		//计算返回帧的CRC校验值
 	MDbuf[len++] = crc & 0xFF;		//CRC低字节
 	MDbuf[len++] = crc >> 8;		//CRC高字节
-	HAL_UART_Transmit(&huart2, MDbuf, len, 1000);	//发送返回帧	
+	if (MDbuf[0]!=0)				//广播模式不需要发送返回帧
+	{
+		HAL_UART_Transmit(&huart2, MDbuf, len, 1000);	//发送返回帧
+	}
+	
 
 }
 
@@ -127,10 +130,10 @@ static void gasTxCommand16(uint8_t slaveAdd) {
 	gasTxBuf[0] = slaveAdd;
 	gasTxBuf[1] = 0x10;
 	gasTxBuf[2] = 0x00;         //数据的起始地址；
-	gasTxBuf[3] = 0x04;
+	gasTxBuf[3] = 0x03;
 	gasTxBuf[4] = 0x00;         //数据的个数；
-	gasTxBuf[5] = 0x09;
-	gasTxBuf[6] = 0x12;         //数据的字节数；
+	gasTxBuf[5] = 0x0a;
+	gasTxBuf[6] = 0x14;         //数据的字节数；
 	for (i = 0; i<gasTxBuf[5]; i++) {
 		gasTxBuf[7 + 2 * i] = (uint8_t)(localData[i + gasTxBuf[3]] >> 8);
 		gasTxBuf[8 + 2 * i] = (uint8_t)(localData[i + gasTxBuf[3]] & 0xff);
@@ -140,17 +143,13 @@ static void gasTxCommand16(uint8_t slaveAdd) {
 	gasTxBuf[8 + 2 * gasTxBuf[5]] = (uint8_t)((temp >> 8) & 0xff);
 	gasTxCount = 9 + 2 * gasTxBuf[5];
 	HAL_UART_Transmit(&huart2, gasTxBuf, gasTxCount, 0xffff);
-	//HAL_UART_Transmit_DMA(&huart2, gasTxBuf, gasTxCount);
 }
 
 static void gasAlermTx() {
 
-
-	for (uint8_t i = gasTxAdd; i <= gasTxAddAmount; i++)
-	{
-		gasTxCommand16(i);
+		gasTxCommand16(0);
+		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
 		osDelay(100);
-	}
 }
 
 static void gasAlermRx() {
