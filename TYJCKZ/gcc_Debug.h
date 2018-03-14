@@ -1189,31 +1189,31 @@
 #endif
 
 // --- Include directories begin --- //
-//C:\Users\K\Desktop\Stm32VS\TYJCKZ\Inc
+//..\Inc
 //.
-//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/FreeRTOS/Source/CMSIS_RTOS
-//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/FreeRTOS/Source/include
-//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/FreeRTOS/Source/Portable/gcc/ARM_CM3
-//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc
-//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy
-//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include
-//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F1xxxx/CMSIS_HAL/Include
-//c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/6.2.0/../../../../arm-eabi/include/c++/6.2.0
-//c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/6.2.0/../../../../arm-eabi/include/c++/6.2.0/arm-eabi/thumb/cortex_m3
-//c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/6.2.0/../../../../arm-eabi/include/c++/6.2.0/backward
-//c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/6.2.0/include
-//c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/6.2.0/include-fixed
-//c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/6.2.0/../../../../arm-eabi/sys-include
-//c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/6.2.0/../../../../arm-eabi/include
+//$(BSP_ROOT)/FreeRTOS/Source/CMSIS_RTOS
+//$(BSP_ROOT)/FreeRTOS/Source/include
+//$(BSP_ROOT)/FreeRTOS/Source/Portable/gcc/ARM_CM3
+//$(BSP_ROOT)/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc
+//$(BSP_ROOT)/STM32F1xxxx/STM32F1xx_HAL_Driver/Inc/Legacy
+//$(BSP_ROOT)/STM32F1xxxx/CMSIS_HAL/Device/ST/STM32F1xx/Include
+//$(BSP_ROOT)/STM32F1xxxx/CMSIS_HAL/Include
+//$(TOOLCHAIN_ROOT)\arm-eabi\include\c++\6.2.0
+//$(TOOLCHAIN_ROOT)\arm-eabi\include\c++\6.2.0\arm-eabi\thumb\cortex_m3
+//$(TOOLCHAIN_ROOT)\arm-eabi\include\c++\6.2.0\backward
+//$(TOOLCHAIN_ROOT)\lib\gcc\arm-eabi\6.2.0\include
+//$(TOOLCHAIN_ROOT)\lib\gcc\arm-eabi\6.2.0\include-fixed
+//$(TOOLCHAIN_ROOT)\arm-eabi\sys-include
+//$(TOOLCHAIN_ROOT)\arm-eabi\include
 // --- Include directories end --- //
 
 
 // --- Library directories begin --- //
-//c:/sysgcc/arm-eabi/bin/../lib/gcc/arm-eabi/6.2.0/thumb/cortex_m3/
-//c:/sysgcc/arm-eabi/bin/../lib/gcc/arm-eabi/6.2.0/../../../../arm-eabi/lib/thumb/cortex_m3/
-//c:/sysgcc/arm-eabi/bin/../lib/gcc/arm-eabi/6.2.0/
-//c:/sysgcc/arm-eabi/bin/../lib/gcc/
-//c:/sysgcc/arm-eabi/bin/../lib/gcc/arm-eabi/6.2.0/../../../../arm-eabi/lib/
+//$(TOOLCHAIN_ROOT)\lib\gcc\arm-eabi\6.2.0\thumb\cortex_m3\
+//$(TOOLCHAIN_ROOT)\arm-eabi\lib\thumb\cortex_m3\
+//$(TOOLCHAIN_ROOT)\lib\gcc\arm-eabi\6.2.0\
+//$(TOOLCHAIN_ROOT)\lib\gcc\
+//$(TOOLCHAIN_ROOT)\arm-eabi\lib\
 // --- Library directories begin --- //
 
 #pragma clang diagnostic pop

@@ -41,6 +41,7 @@ static void sendOneBit(uint8_t dtmfData) {
 	HT9200_CE_HIGH;
 	osDelay(10);
 	HT9200_CLK_LOW;
+	HT9200_DATA_LOW;
 }
 
 
@@ -62,8 +63,6 @@ void telDial() {
 	else {
 		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9, GPIO_PIN_RESET);
 	}
-
-
 
 	if (((localData[2] >> 0) & 1) != keyStatusFlag[0])
 	{
