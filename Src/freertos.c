@@ -57,6 +57,7 @@
 #include "dataProcessing.h"
 #include "telDial.h"
 #include "gasAlermRxTx.h"
+#include "iwdg.h"
 /* USER CODE END Includes */
 
 /* Variables -----------------------------------------------------------------*/
@@ -186,6 +187,7 @@ void FuncTelDial(void const * argument)
   for(;;)
   {
 	  osDelay(100);
+	  HAL_IWDG_Refresh(&hiwdg);
   }
   /* USER CODE END FuncTelDial */
 }
