@@ -2,7 +2,6 @@
 #include "modbusToAndroid.h"
 #include "adc.h"
 #include "usart.h"
-#include "i2c.h"
 #include "gasAlermRxTx.h"
 
 

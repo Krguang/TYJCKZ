@@ -68,9 +68,6 @@
     <ClInclude Include="..\Inc\gpio.h">
       <Filter>Header files\Inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\Inc\i2c.h">
-      <Filter>Header files\Inc</Filter>
-    </ClInclude>
     <ClInclude Include="..\Inc\iwdg.h">
       <Filter>Header files\Inc</Filter>
     </ClInclude>
@@ -626,9 +623,6 @@
       <Filter>Source files\Src</Filter>
     </ClCompile>
     <ClCompile Include="..\Src\gpio.c">
-      <Filter>Source files\Src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Src\i2c.c">
       <Filter>Source files\Src</Filter>
     </ClCompile>
     <ClCompile Include="..\Src\iwdg.c">

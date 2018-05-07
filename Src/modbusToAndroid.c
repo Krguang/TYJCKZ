@@ -42,7 +42,7 @@ void sendDataMaster03() {
 }
 
 void sendDataMaster16() {
-
+	
 	uint16_t temp;
 	uint8_t i;
 
@@ -85,7 +85,7 @@ static void ModbusDecode(uint8_t *MDbuf, uint8_t len) {
 void Usart1RxMonitor() {
 	if (uart1_recv_end_flag)
 	{
-		
+
 		ModbusDecode(Usart1ReceiveBuffer.BufferArray, Usart1ReceiveBuffer.BufferLen);
 		Usart1ReceiveBuffer.BufferLen = 0;
 		uart1_recv_end_flag = 0;

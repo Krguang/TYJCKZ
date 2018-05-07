@@ -77,7 +77,6 @@
     <ClInclude Include="..\Inc\FreeRTOSConfig.h" />
     <ClInclude Include="..\Inc\gasAlermRxTx.h" />
     <ClInclude Include="..\Inc\gpio.h" />
-    <ClInclude Include="..\Inc\i2c.h" />
     <ClInclude Include="..\Inc\iwdg.h" />
     <ClInclude Include="..\Inc\main.h" />
     <ClInclude Include="..\Inc\modbusToAndroid.h" />
@@ -265,7 +264,6 @@
     <ClCompile Include="..\Src\freertos.c" />
     <ClCompile Include="..\Src\gasAlermRxTx.c" />
     <ClCompile Include="..\Src\gpio.c" />
-    <ClCompile Include="..\Src\i2c.c" />
     <ClCompile Include="..\Src\iwdg.c" />
     <ClCompile Include="..\Src\main.c" />
     <ClCompile Include="..\Src\modbusToAndroid.c" />

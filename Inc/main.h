@@ -9,7 +9,7 @@
   * inserted by the user or by software development tools
   * are owned by their respective copyright owners.
   *
-  * Copyright (c) 2017 STMicroelectronics International N.V. 
+  * Copyright (c) 2018 STMicroelectronics International N.V. 
   * All rights reserved.
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -55,6 +55,19 @@
 /* USER CODE END Includes */
 
 /* Private define ------------------------------------------------------------*/
+
+#define gaoSu_Pin GPIO_PIN_3
+#define gaoSu_GPIO_Port GPIOB
+#define zhongSu_Pin GPIO_PIN_4
+#define zhongSu_GPIO_Port GPIOB
+#define diSu_Pin GPIO_PIN_5
+#define diSu_GPIO_Port GPIOB
+#define lengShui_Pin GPIO_PIN_6
+#define lengShui_GPIO_Port GPIOB
+#define reShui_Pin GPIO_PIN_7
+#define reShui_GPIO_Port GPIOB
+#define beiYong_Pin GPIO_PIN_8
+#define beiYong_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
