@@ -200,7 +200,8 @@ void FuncGasRxTx(void const * argument)
   for(;;)
   {
 	 gasAlermRxTx();
-	 osDelay(1);
+	 osDelay(1000);
+	// HAL_GPIO_TogglePin(zhongSu_GPIO_Port, zhongSu_Pin);
   }
   /* USER CODE END FuncGasRxTx */
 }
