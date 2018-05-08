@@ -124,7 +124,7 @@ int main(void)
   __HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
 
   HAL_ADCEx_Calibration_Start(&hadc1);
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)ADC_ConvertedValue, 7);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)ADC_ConvertedValue, 10);
 
   /* USER CODE END 2 */
 

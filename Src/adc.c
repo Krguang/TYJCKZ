@@ -55,8 +55,8 @@
 
 /* USER CODE BEGIN 0 */
 
-volatile uint16_t ADC_ConvertedValue[7];
-uint32_t ADC_Average[7];
+volatile uint16_t ADC_ConvertedValue[10];
+uint32_t ADC_Average[10];
 
 /* USER CODE END 0 */
 

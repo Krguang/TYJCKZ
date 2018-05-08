@@ -174,29 +174,33 @@ static void relayControl() {
 
 static void gasCollect() {
 
-	uint16_t gasTemp[7];
+	uint16_t gasTemp[10];
 
 	for (uint8_t i = 0; i < 100; i++)
 	{
-		for (uint8_t j = 0; j < 7; j++) {
+		for (uint8_t j = 0; j < 10; j++) {
 			ADC_Average[j] += ADC_ConvertedValue[j];
 		}
 	}
 
-	for (uint8_t i = 0; i < 7; i++)
+	for (uint8_t i = 0; i < 10; i++)
 	{
 
-		if (ADC_Average[i]<84000)
+		if (i<7)
 		{
-			ADC_Average[i] = 84000;
+			if (ADC_Average[i]<84000)
+			{
+				ADC_Average[i] = 84000;
+			}
+			gasTemp[i] = (uint16_t)((ADC_Average[i] / 100 - 840) * 999 / 3255);
 		}
-
-
-		gasTemp[i]= (uint16_t)((ADC_Average[i] / 100 - 840) * 999 / 3255);
+		else
+		{
+			gasTemp[i] = (uint16_t)(ADC_Average[i] / 100 * 999 / 4096);
+		}
 		
 		localData[i + 6] = gasTemp[i];
 		ADC_Average[i] = 0;
-
 	}
 }
 
