@@ -128,7 +128,7 @@ static void gasTxCommand16(uint8_t slaveAdd) {
 	gasTxBuf[0] = slaveAdd;
 	gasTxBuf[1] = 0x10;
 	gasTxBuf[2] = 0x00;         //数据的起始地址；
-	gasTxBuf[3] = 0x03;
+	gasTxBuf[3] = 0x0d;
 	gasTxBuf[4] = 0x00;         //数据的个数；
 	gasTxBuf[5] = 0x0a;
 	gasTxBuf[6] = 0x14;         //数据的字节数；
