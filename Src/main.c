@@ -51,6 +51,7 @@
 #include "stm32f1xx_hal.h"
 #include "cmsis_os.h"
 #include "adc.h"
+#include "dac.h"
 #include "dma.h"
 #include "iwdg.h"
 #include "usart.h"
@@ -118,6 +119,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_IWDG_Init();
+  MX_DAC_Init();
   /* USER CODE BEGIN 2 */
 
   __HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);    //Ê¹ÄÜ¿ÕÏÐÖÐ¶Ï
@@ -125,7 +127,8 @@ int main(void)
 
   HAL_ADCEx_Calibration_Start(&hadc1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t *)ADC_ConvertedValue, 10);
-
+  HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
+  HAL_DAC_Start(&hdac, DAC_CHANNEL_2);
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

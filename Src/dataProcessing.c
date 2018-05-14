@@ -3,7 +3,7 @@
 #include "adc.h"
 #include "usart.h"
 #include "gasAlermRxTx.h"
-
+#include "dac.h"
 
 static void backgroundMusic() {
 
@@ -199,122 +199,183 @@ static void gasCollect() {
 			gasTemp[i] = (uint16_t)(ADC_Average[i] / 100 * 999 / 4096);
 		}
 		
-		localData[i + 6] = gasTemp[i];
+		localData[i + 16] = gasTemp[i];
 		ADC_Average[i] = 0;
+	}
+}
+
+static void voltageOutput() {
+
+	switch (localData[3])
+	{
+	case 0: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0);//0V
+		break;
+	case 1: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 550);//1V
+		break;
+	case 2: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 1000);//2V
+		break;
+	case 3: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 1400);//3V
+		break;
+	case 4: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 1750);//4V
+		break;
+	case 5: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2100);//5V
+		break;
+	case 6: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2500);//6V
+		break;
+	case 7: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2900);//7V
+		break;
+	case 8: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 3260);//8V
+		break;
+	case 9: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 3655);//9V
+		break;
+	case 10: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 4095);//10V
+		break;
+
+	default:
+		break;
+	}
+
+	switch (localData[4])
+	{
+	case 0: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 0);//0V
+		break;
+	case 1: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 550);//1V
+		break;
+	case 2: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 1000);//2V
+		break;
+	case 3: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 1400);//3V
+		break;
+	case 4: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 1750);//4V
+		break;
+	case 5: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 2100);//5V
+		break;
+	case 6: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 2500);//6V
+		break;
+	case 7: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 2900);//7V
+		break;
+	case 8: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 3260);//8V
+		break;
+	case 9: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 3655);//9V
+		break;
+	case 10: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 4095);//10V
+		break;
+
+	default:
+		break;
 	}
 }
 
 static void gasAlerm() {
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3)== GPIO_PIN_RESET) {
-		localData[3] |= (1 << 0);
+		localData[13] |= (1 << 0);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 0);
+		localData[13] &= ~(1 << 0);
 	}
 	
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 1);
+		localData[13] |= (1 << 1);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 1);
+		localData[13] &= ~(1 << 1);
 	}
 	
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 2);
+		localData[13] |= (1 << 2);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 2);
+		localData[13] &= ~(1 << 2);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 3);
+		localData[13] |= (1 << 3);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 3);
+		localData[13] &= ~(1 << 3);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 4);
+		localData[13] |= (1 << 4);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 4);
+		localData[13] &= ~(1 << 4);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 5);
+		localData[13] |= (1 << 5);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 5);
+		localData[13] &= ~(1 << 5);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 6);
+		localData[13] |= (1 << 6);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 6);
+		localData[13] &= ~(1 << 6);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 7);
+		localData[13] |= (1 << 7);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 7);
+		localData[13] &= ~(1 << 7);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 8);
+		localData[13] |= (1 << 8);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 8);
+		localData[13] &= ~(1 << 8);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 9);
+		localData[13] |= (1 << 9);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 9);
+		localData[13] &= ~(1 << 9);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 10);
+		localData[13] |= (1 << 10);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 10);
+		localData[13] &= ~(1 << 10);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_2) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 11);
+		localData[13] |= (1 << 11);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 11);
+		localData[13] &= ~(1 << 11);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_1) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 12);
+		localData[13] |= (1 << 12);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 12);
+		localData[13] &= ~(1 << 12);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_0) == GPIO_PIN_RESET) {
-		localData[3] |= (1 << 13);
+		localData[13] |= (1 << 13);
 	}
 	else
 	{
-		localData[3] &= ~(1 << 13);
+		localData[13] &= ~(1 << 13);
 	}
 }
 
@@ -347,6 +408,7 @@ static void sendTime() {
 void dataProcessing() {
 	backgroundMusic();
 	relayControl();
+	voltageOutput();
 	//sendTime();
 	if (gasSensorSwitch==1)
 	{

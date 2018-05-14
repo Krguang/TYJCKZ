@@ -27,7 +27,7 @@
   <PropertyGroup Label="VisualGDBPackageDefinitions">
     <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
     <BSP_ID>com.sysprogs.arm.stm32</BSP_ID>
-    <BSP_VERSION>4.5R3</BSP_VERSION>
+    <BSP_VERSION>4.6R4</BSP_VERSION>
   </PropertyGroup>
   <ImportGroup Label="VisualGDBFindComponents">
     <Import Project="$(LOCALAPPDATA)\VisualGDB\FindComponents.props" />
@@ -72,6 +72,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Inc\adc.h" />
+    <ClInclude Include="..\Inc\dac.h" />
     <ClInclude Include="..\Inc\dataProcessing.h" />
     <ClInclude Include="..\Inc\dma.h" />
     <ClInclude Include="..\Inc\FreeRTOSConfig.h" />
@@ -259,6 +260,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Src\adc.c" />
+    <ClCompile Include="..\Src\dac.c" />
     <ClCompile Include="..\Src\dataProcessing.c" />
     <ClCompile Include="..\Src\dma.c" />
     <ClCompile Include="..\Src\freertos.c" />
