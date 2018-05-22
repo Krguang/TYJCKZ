@@ -170,6 +170,54 @@ static void relayControl() {
 		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0, GPIO_PIN_RESET);
 	}
 
+	if ((localData[1]>>10)&0x0001)
+	{
+		HAL_GPIO_WritePin(gaoSu_GPIO_Port, gaoSu_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(gaoSu_GPIO_Port, gaoSu_Pin, GPIO_PIN_RESET);
+	}
+
+	if ((localData[1] >> 11) & 0x0001)
+	{
+		HAL_GPIO_WritePin(zhongSu_GPIO_Port, zhongSu_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(zhongSu_GPIO_Port, zhongSu_Pin, GPIO_PIN_RESET);
+	}
+
+	if ((localData[1] >> 12) & 0x0001)
+	{
+		HAL_GPIO_WritePin(diSu_GPIO_Port, diSu_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(diSu_GPIO_Port, diSu_Pin, GPIO_PIN_RESET);
+	}
+
+	if ((localData[1] >> 13) & 0x0001)
+	{
+		HAL_GPIO_WritePin(lengShui_GPIO_Port, lengShui_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(lengShui_GPIO_Port, lengShui_Pin, GPIO_PIN_RESET);
+	}
+
+	if ((localData[1] >> 14) & 0x0001)
+	{
+		HAL_GPIO_WritePin(reShui_GPIO_Port, reShui_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(reShui_GPIO_Port, reShui_Pin, GPIO_PIN_RESET);
+	}
+
+	if ((localData[1] >> 15) & 0x0001)
+	{
+		HAL_GPIO_WritePin(beiYong_GPIO_Port, beiYong_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(beiYong_GPIO_Port, beiYong_Pin, GPIO_PIN_RESET);
+	}
+
 }
 
 static void gasCollect() {
@@ -196,13 +244,14 @@ static void gasCollect() {
 		}
 		else
 		{
-			gasTemp[i] = (uint16_t)(ADC_Average[i] / 100 * 999 / 4096);
+			gasTemp[i] = (uint16_t)(ADC_Average[i] / 100 * 1000 / 4096);
 		}
 		
-		localData[i + 16] = gasTemp[i];
+		localData[i + 6] = gasTemp[i];
 		ADC_Average[i] = 0;
 	}
 }
+/*
 
 static void voltageOutput() {
 
@@ -264,118 +313,119 @@ static void voltageOutput() {
 		break;
 	}
 }
+*/
 
 static void gasAlerm() {
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3)== GPIO_PIN_RESET) {
-		localData[13] |= (1 << 0);
+		localData[3] |= (1 << 0);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 0);
+		localData[3] &= ~(1 << 0);
 	}
 	
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 1);
+		localData[3] |= (1 << 1);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 1);
+		localData[3] &= ~(1 << 1);
 	}
 	
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 2);
+		localData[3] |= (1 << 2);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 2);
+		localData[3] &= ~(1 << 2);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 3);
+		localData[3] |= (1 << 3);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 3);
+		localData[3] &= ~(1 << 3);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 4);
+		localData[3] |= (1 << 4);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 4);
+		localData[3] &= ~(1 << 4);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 5);
+		localData[3] |= (1 << 5);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 5);
+		localData[3] &= ~(1 << 5);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 6);
+		localData[3] |= (1 << 6);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 6);
+		localData[3] &= ~(1 << 6);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 7);
+		localData[3] |= (1 << 7);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 7);
+		localData[3] &= ~(1 << 7);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 8);
+		localData[3] |= (1 << 8);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 8);
+		localData[3] &= ~(1 << 8);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 9);
+		localData[3] |= (1 << 9);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 9);
+		localData[3] &= ~(1 << 9);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 10);
+		localData[3] |= (1 << 10);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 10);
+		localData[3] &= ~(1 << 10);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_2) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 11);
+		localData[3] |= (1 << 11);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 11);
+		localData[3] &= ~(1 << 11);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_1) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 12);
+		localData[3] |= (1 << 12);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 12);
+		localData[3] &= ~(1 << 12);
 	}
 
 	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_0) == GPIO_PIN_RESET) {
-		localData[13] |= (1 << 13);
+		localData[3] |= (1 << 13);
 	}
 	else
 	{
-		localData[13] &= ~(1 << 13);
+		localData[3] &= ~(1 << 13);
 	}
 }
 
@@ -408,7 +458,7 @@ static void sendTime() {
 void dataProcessing() {
 	backgroundMusic();
 	relayControl();
-	voltageOutput();
+	//voltageOutput();
 	//sendTime();
 	if (gasSensorSwitch==1)
 	{

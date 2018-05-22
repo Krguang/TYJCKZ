@@ -49,7 +49,7 @@ void sendDataMaster16() {
 	txBuf[0] = M2ASlaveAdd;
 	txBuf[1] = 0x10;
 	txBuf[2] = 0x00;         //数据的起始地址；
-	txBuf[3] = 0x0d;
+	txBuf[3] = 0x03;
 	txBuf[4] = 0x00;         //数据的个数；
 	txBuf[5] = 0x0d;
 	txBuf[6] = 0x1a;         //数据的字节数；
