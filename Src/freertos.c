@@ -201,12 +201,6 @@ void FuncGasRxTx(void const * argument)
   {
 	 gasAlermRxTx();
 	 osDelay(1);
-	 HAL_GPIO_WritePin(gaoSu_GPIO_Port, gaoSu_Pin, GPIO_PIN_SET);
-	 HAL_GPIO_WritePin(zhongSu_GPIO_Port, zhongSu_Pin, GPIO_PIN_SET);
-	 HAL_GPIO_WritePin(diSu_GPIO_Port, diSu_Pin, GPIO_PIN_SET);
-	 HAL_GPIO_WritePin(reShui_GPIO_Port, reShui_Pin, GPIO_PIN_SET);
-
-	// HAL_GPIO_TogglePin(zhongSu_GPIO_Port, zhongSu_Pin);
   }
   /* USER CODE END FuncGasRxTx */
 }

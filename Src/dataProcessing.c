@@ -170,11 +170,56 @@ static void relayControl() {
 		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0, GPIO_PIN_RESET);
 	}
 
+	if ((localData[1] >> 10) & 0x0001)
+	{
+		HAL_GPIO_WritePin(gaoSu_GPIO_Port, gaoSu_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(gaoSu_GPIO_Port, gaoSu_Pin, GPIO_PIN_RESET);
+	}
+
+	if ((localData[1] >> 11) & 0x0001)
+	{
+		HAL_GPIO_WritePin(zhongSu_GPIO_Port, zhongSu_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(zhongSu_GPIO_Port, zhongSu_Pin, GPIO_PIN_RESET);
+	}
+
+	if ((localData[1] >> 12) & 0x0001)
+	{
+		HAL_GPIO_WritePin(diSu_GPIO_Port, diSu_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(diSu_GPIO_Port, diSu_Pin, GPIO_PIN_RESET);
+	}
+
+	if ((localData[1] >> 13) & 0x0001)
+	{
+		HAL_GPIO_WritePin(lengShui_GPIO_Port, lengShui_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(lengShui_GPIO_Port, lengShui_Pin, GPIO_PIN_RESET);
+	}
+
+	if ((localData[1] >> 14) & 0x0001)
+	{
+		HAL_GPIO_WritePin(reShui_GPIO_Port, reShui_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(reShui_GPIO_Port, reShui_Pin, GPIO_PIN_RESET);
+	}
+
+	if ((localData[1] >> 15) & 0x0001)
+	{
+		HAL_GPIO_WritePin(beiYong_GPIO_Port, beiYong_Pin, GPIO_PIN_SET);
+	}
+	else {
+		HAL_GPIO_WritePin(beiYong_GPIO_Port, beiYong_Pin, GPIO_PIN_RESET);
+	}
 }
 
-static void gasCollect() {
-
-	uint16_t gasTemp[10];
+static void getAdcValue() {
 
 	for (uint8_t i = 0; i < 100; i++)
 	{
@@ -182,26 +227,37 @@ static void gasCollect() {
 			ADC_Average[j] += ADC_ConvertedValue[j];
 		}
 	}
+}
 
-	for (uint8_t i = 0; i < 10; i++)
+
+static void gasCollect() {
+
+	uint16_t gasTemp[10];
+
+	
+	for (uint8_t i = 0; i < 7; i++)
 	{
 
-		if (i<7)
+		if (ADC_Average[i]<84000)
 		{
-			if (ADC_Average[i]<84000)
-			{
-				ADC_Average[i] = 84000;
-			}
-			gasTemp[i] = (uint16_t)((ADC_Average[i] / 100 - 840) * 999 / 3255);
+			ADC_Average[i] = 84000;
 		}
-		else
-		{
-			gasTemp[i] = (uint16_t)(ADC_Average[i] / 100 * 999 / 4096);
-		}
+		gasTemp[i] = (uint16_t)((ADC_Average[i] / 100 - 840) * 999 / 3255);
 		
 		localData[i + 6] = gasTemp[i];
 		ADC_Average[i] = 0;
 	}
+}
+
+static void getTempAndHumi() {
+
+	localData[13] = (uint16_t)(ADC_Average[7] / 100 * 1000 / 4096);
+	localData[14] = (uint16_t)(ADC_Average[8] / 100 * 500 / 4096);
+	localData[15] = (uint16_t)(ADC_Average[9] / 100 * 1000 / 4096);
+	ADC_Average[7] = 0;
+	ADC_Average[8] = 0;
+	ADC_Average[9] = 0;
+
 }
 
 static void gasAlerm() {
@@ -347,6 +403,8 @@ static void sendTime() {
 void dataProcessing() {
 	backgroundMusic();
 	relayControl();
+	getAdcValue();
+	getTempAndHumi();
 	//sendTime();
 	if (gasSensorSwitch==1)
 	{
