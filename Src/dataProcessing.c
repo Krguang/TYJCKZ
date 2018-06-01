@@ -3,7 +3,7 @@
 #include "adc.h"
 #include "usart.h"
 #include "gasAlermRxTx.h"
-
+#include "cmsis_os.h"
 
 static void backgroundMusic() {
 
@@ -172,6 +172,7 @@ static void relayControl() {
 
 	if ((localData[1] >> 10) & 0x0001)
 	{
+		osDelay(1000);
 		HAL_GPIO_WritePin(gaoSu_GPIO_Port, gaoSu_Pin, GPIO_PIN_SET);
 	}
 	else {
@@ -180,6 +181,7 @@ static void relayControl() {
 
 	if ((localData[1] >> 11) & 0x0001)
 	{
+		osDelay(1000);
 		HAL_GPIO_WritePin(zhongSu_GPIO_Port, zhongSu_Pin, GPIO_PIN_SET);
 	}
 	else {
@@ -188,6 +190,7 @@ static void relayControl() {
 
 	if ((localData[1] >> 12) & 0x0001)
 	{
+		osDelay(1000);
 		HAL_GPIO_WritePin(diSu_GPIO_Port, diSu_Pin, GPIO_PIN_SET);
 	}
 	else {
