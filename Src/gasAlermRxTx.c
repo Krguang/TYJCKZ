@@ -118,6 +118,8 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 	{
 		HAL_UART_Transmit(&huart2, MDbuf, len, 1000);	//∑¢ÀÕ∑µªÿ÷°
 	}
+
+	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
 }
 
 static void gasTxCommand16(uint8_t slaveAdd) {
