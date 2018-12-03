@@ -13,7 +13,7 @@ uint16_t gasRxTxTemp[50];
 uint8_t gasTxBuf[50];
 uint8_t gasTxCount;
 
-uint8_t gasSensorSwitch = 1;//作为气体从站时,需要关闭气体传感器的输入.
+uint8_t gasSensorSwitch = 1;//作为气体从站时,打开气体传感器采集，作为从站等待主站读取数据。
 
 
 static uint16_t GetCRC16(uint8_t *arr_buff, uint8_t len) {  //CRC校验程序
@@ -166,12 +166,12 @@ void gasAlermRxTx() {
 
 	if (HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_4) == GPIO_PIN_SET)
 	{
-		gasAlermTx();
-		gasSensorSwitch = 1;
+		gasAlermRx();			//主站
+		gasSensorSwitch = 0;
 	}
 	else
 	{
-		gasAlermRx();
-		gasSensorSwitch = 0;
+		gasAlermTx();			//从站
+		gasSensorSwitch = 1;
 	}
 }

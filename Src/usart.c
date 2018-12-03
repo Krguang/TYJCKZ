@@ -322,7 +322,6 @@ void USART2_IRQHandler(void)
 		Usart2ReceiveBuffer.BufferLen = BUFFER_SIZE - temp;
 		uart2_recv_end_flag = 1;
 		HAL_UART_Receive_DMA(&huart2, Usart2ReceiveBuffer.BufferArray, BUFFER_SIZE);
-		
 	}
 }
 
