@@ -3,10 +3,10 @@
 
 uint8_t M2ASlaveAdd = 1;
 
-uint8_t txBuf[50];
+uint8_t txBuf[255];
 uint8_t txCount = 0;
 
-uint16_t localData[50];
+uint16_t localData[255];
 
 
 static uint16_t GetCRC16(uint8_t *arr_buff, uint8_t len) {  //CRC校验程序
@@ -49,10 +49,10 @@ void sendDataMaster16() {
 	txBuf[0] = M2ASlaveAdd;
 	txBuf[1] = 0x10;
 	txBuf[2] = 0x00;         //数据的起始地址；
-	txBuf[3] = 0x03;
+	txBuf[3] = 0x06;
 	txBuf[4] = 0x00;         //数据的个数；
-	txBuf[5] = 0x0d;
-	txBuf[6] = 0x1a;         //数据的字节数；
+	txBuf[5] = 26;
+	txBuf[6] = 52;         //数据的字节数；
 	for (i = 0; i<txBuf[5]; i++) {
 		txBuf[7 + 2 * i] = (uint8_t)(localData[i+ txBuf[3]] >> 8);
 		txBuf[8 + 2 * i] = (uint8_t)(localData[i+ txBuf[3]] & 0xff);
@@ -85,7 +85,6 @@ static void ModbusDecode(uint8_t *MDbuf, uint8_t len) {
 void Usart1RxMonitor() {
 	if (uart1_recv_end_flag)
 	{
-
 		ModbusDecode(Usart1ReceiveBuffer.BufferArray, Usart1ReceiveBuffer.BufferLen);
 		Usart1ReceiveBuffer.BufferLen = 0;
 		uart1_recv_end_flag = 0;

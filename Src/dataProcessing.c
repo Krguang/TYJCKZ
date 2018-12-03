@@ -242,10 +242,7 @@ static void gasCollect() {
 			}
 			gasTemp[i] = (uint16_t)((ADC_Average[i] / 100 - 840) * 999 / 3255);
 
-			if (1 == gasSensorSwitch)
-			{
-				localData[i + 6] = gasTemp[i];
-			}
+			localData[i + 6] = gasTemp[i];
 		}
 		else
 		{
@@ -465,8 +462,8 @@ void dataProcessing() {
 	relayControl();
 	//voltageOutput();
 	//sendTime();
-	gasCollect();
-	if (gasSensorSwitch==0)
+	//gasCollect();
+	if (gasSensorSwitch == 1)
 	{
 		gasCollect();
 		//gasAlerm();

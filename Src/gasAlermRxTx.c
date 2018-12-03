@@ -46,7 +46,7 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 	crcl = crc & 0xFF;
 	if ((MDbuf[len - 1] != crch) || (MDbuf[len - 2] != crcl)) return;	//如CRC校验不符时直接退出
 	switch (MDbuf[1]) {											//地址和校验字均相符后，解析功能码，执行相关操作
-/*
+
 	case 0x03:											//读取一个或连续的寄存器
 		if ((MDbuf[2] == 0x00) && (MDbuf[3] <= 0x20)) {			//只支持0x0000～0x0020
 			i = MDbuf[3];									//提取寄存器地址
@@ -54,7 +54,7 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 			MDbuf[2] = cnt * 2;								//读取数据的字节数，为寄存器数*2
 			len = 3;										//帧前部已有地址、功能码、字节数共3个字节
 			while (cnt--) {
-				unsigned int LocalStatusArrayTemp = LocalStatusArray[i++];	//读取的是16位数组，转换为2个8位数据存入发送数组
+				unsigned int LocalStatusArrayTemp = localData[i++];	//读取的是16位数组，转换为2个8位数据存入发送数组
 				MDbuf[len++] = LocalStatusArrayTemp >> 8;
 				MDbuf[len++] = LocalStatusArrayTemp & 0xff;
 			}
@@ -69,7 +69,7 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 	case 0x06:											//写入单个寄存器
 		if ((MDbuf[2] == 0x00) && (MDbuf[3] <= 0x20)) {	//寄存器地址支持0x0000～0x0020
 			i = MDbuf[3];								//提取寄存器地址
-			LocalStatusArray[i] = MDbuf[5];				//保存寄存器数据
+			gasRxTxTemp[i] = MDbuf[5];				//保存寄存器数据
 			len -= 2;									//长度-2以重新计算CRC并返回原帧
 		}
 		else {					//寄存器地址不被支持时，返回错误码{
@@ -78,7 +78,7 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 			len = 3;
 		}
 		break;
-*/
+
 	case 0x10:
 		if ((MDbuf[2] == 0x00) && (MDbuf[3] <= 0x20)) {		//寄存器地址支持0x0000～0x0020
 			i = MDbuf[3];									//提取寄存器地址
@@ -122,32 +122,69 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
 }
 
-static void gasTxCommand16(uint8_t slaveAdd) {
+static void modbusMasterDecode(unsigned char *MDbuf, unsigned char len) {
+
+	uint16_t  crc;
+	uint8_t crch, crcl;
+	uint16_t temp;
+
+	if (MDbuf[1] != 0x03) return;									//检验功能码
+	crc = GetCRC16(MDbuf, len - 2);								//计算CRC校验值
+	crch = crc >> 8;
+	crcl = crc & 0xFF;
+	if ((MDbuf[len - 1] != crch) || (MDbuf[len - 2] != crcl)) return;	//如CRC校验不符时直接退出
+
+	switch (MDbuf[0])
+	{
+	case 1:
+		for (uint8_t i = 0; i < MDbuf[2] / 2; i++)
+		{
+			localData[i+6] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+		}
+		break;
+	case 2:
+		for (uint8_t i = 0; i < MDbuf[2] / 2; i++)
+		{
+			localData[i + 16] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+		}
+
+		break;
+	case 3:
+		for (uint8_t i = 0; i < MDbuf[2] / 2; i++)
+		{
+			localData[i + 24] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+		}
+
+		break;
+	default:
+		break;
+	}
+}
+
+static void gasTxCommand03(uint8_t slaveAdd) {
 
 	uint16_t temp;
-	uint8_t i;
-
 	gasTxBuf[0] = slaveAdd;
-	gasTxBuf[1] = 0x10;
-	gasTxBuf[2] = 0x00;         //数据的起始地址；
-	gasTxBuf[3] = 0x03;
-	gasTxBuf[4] = 0x00;         //数据的个数；
-	gasTxBuf[5] = 0x0a;
-	gasTxBuf[6] = 0x14;         //数据的字节数；
-	for (i = 0; i<gasTxBuf[5]; i++) {
-		gasTxBuf[7 + 2 * i] = (uint8_t)(localData[i + gasTxBuf[3]] >> 8);
-		gasTxBuf[8 + 2 * i] = (uint8_t)(localData[i + gasTxBuf[3]] & 0xff);
-	}
-	temp = GetCRC16(gasTxBuf, 2 * gasTxBuf[5] + 7);
-	gasTxBuf[7 + 2 * gasTxBuf[5]] = (uint8_t)(temp & 0xff);
-	gasTxBuf[8 + 2 * gasTxBuf[5]] = (uint8_t)((temp >> 8) & 0xff);
-	gasTxCount = 9 + 2 * gasTxBuf[5];
-	HAL_UART_Transmit(&huart2, gasTxBuf, gasTxCount, 0xffff);
+	gasTxBuf[1] = 0x03;
+	gasTxBuf[2] = 0x00;
+	gasTxBuf[3] = 0x06;
+	gasTxBuf[4] = 0x00;
+	gasTxBuf[5] = 0x08;//读5位
+	temp = GetCRC16(gasTxBuf, 6);
+	gasTxBuf[6] = (uint8_t)(temp & 0xff);
+	gasTxBuf[7] = (uint8_t)(temp >> 8);
+	HAL_UART_Transmit(&huart2, gasTxBuf, 8, 0xffff);
 }
 
 static void gasAlermTx() {
 
-		gasTxCommand16(0);
+		gasTxCommand03(1);
+		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
+		osDelay(100);
+		gasTxCommand03(2);
+		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
+		osDelay(100);
+		gasTxCommand03(3);
 		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
 		osDelay(100);
 }
@@ -156,7 +193,15 @@ static void gasAlermRx() {
 	
 	if (uart2_recv_end_flag)
 	{
-		ModbusDecode(Usart2ReceiveBuffer.BufferArray, Usart2ReceiveBuffer.BufferLen);
+		if (gasSensorSwitch == 1)
+		{
+			ModbusDecode(Usart2ReceiveBuffer.BufferArray, Usart2ReceiveBuffer.BufferLen);
+		}
+		else
+		{
+			modbusMasterDecode(Usart2ReceiveBuffer.BufferArray, Usart2ReceiveBuffer.BufferLen);
+		}
+
 		Usart2ReceiveBuffer.BufferLen = 0;
 		uart2_recv_end_flag = 0;
 	}
@@ -166,12 +211,13 @@ void gasAlermRxTx() {
 
 	if (HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_4) == GPIO_PIN_SET)
 	{
-		gasAlermRx();			//主站
+		gasAlermTx();			//主站
 		gasSensorSwitch = 0;
 	}
 	else
 	{
-		gasAlermTx();			//从站
-		gasSensorSwitch = 1;
+		gasSensorSwitch = 1;	//从站
 	}
+
+	gasAlermRx();
 }
