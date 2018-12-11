@@ -6,5 +6,5 @@
 
 void gasAlermRxTx();
 extern uint8_t gasSensorSwitch;
-
+void gasAlermRx();
 #endif // !__GASALERMRXTX_

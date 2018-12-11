@@ -2,6 +2,7 @@
 #include "modbusToAndroid.h"
 #include "usart.h"
 #include "cmsis_os.h"
+#include "string.h"
 
 uint8_t gasRxAdd = 1;
 
@@ -139,20 +140,43 @@ static void modbusMasterDecode(unsigned char *MDbuf, unsigned char len) {
 	case 1:
 		for (uint8_t i = 0; i < MDbuf[2] / 2; i++)
 		{
-			localData[i+6] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+			if (i == 0)
+			{
+				localData[i + 3] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+			}
+			else if(i > 2)
+			{
+				localData[i + 3] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+			}
+				
 		}
 		break;
 	case 2:
 		for (uint8_t i = 0; i < MDbuf[2] / 2; i++)
 		{
-			localData[i + 16] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+			if (i == 0)
+			{
+				localData[i + 4] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+			}
+			else if(i > 1)
+			{
+				localData[i + 13] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+			}
 		}
 
 		break;
 	case 3:
 		for (uint8_t i = 0; i < MDbuf[2] / 2; i++)
 		{
-			localData[i + 24] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+			if (i == 0)
+			{
+				localData[i + 5] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+			}
+			else
+			{
+				localData[i + 21] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
+			}
+
 		}
 
 		break;
@@ -167,9 +191,9 @@ static void gasTxCommand03(uint8_t slaveAdd) {
 	gasTxBuf[0] = slaveAdd;
 	gasTxBuf[1] = 0x03;
 	gasTxBuf[2] = 0x00;
-	gasTxBuf[3] = 0x06;
+	gasTxBuf[3] = 0x03;
 	gasTxBuf[4] = 0x00;
-	gasTxBuf[5] = 0x08;//∂¡5Œª
+	gasTxBuf[5] = 13;//∂¡5Œª
 	temp = GetCRC16(gasTxBuf, 6);
 	gasTxBuf[6] = (uint8_t)(temp & 0xff);
 	gasTxBuf[7] = (uint8_t)(temp >> 8);
@@ -180,16 +204,16 @@ static void gasAlermTx() {
 
 		gasTxCommand03(1);
 		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
-		osDelay(100);
+		osDelay(50);
 		gasTxCommand03(2);
 		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
-		osDelay(100);
+		osDelay(50);
 		gasTxCommand03(3);
 		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
-		osDelay(100);
+		osDelay(50);
 }
 
-static void gasAlermRx() {
+void gasAlermRx() {
 	
 	if (uart2_recv_end_flag)
 	{
@@ -201,9 +225,9 @@ static void gasAlermRx() {
 		{
 			modbusMasterDecode(Usart2ReceiveBuffer.BufferArray, Usart2ReceiveBuffer.BufferLen);
 		}
-
-		Usart2ReceiveBuffer.BufferLen = 0;
+		
 		uart2_recv_end_flag = 0;
+		Usart2ReceiveBuffer.BufferLen = 0;
 	}
 }
 
@@ -218,6 +242,4 @@ void gasAlermRxTx() {
 	{
 		gasSensorSwitch = 1;	//¥”’æ
 	}
-
-	gasAlermRx();
 }

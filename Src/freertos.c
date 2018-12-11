@@ -171,9 +171,9 @@ void FuncModbusSend(void const * argument)
   for(;;)
   {
 	  sendDataMaster03();
-	  osDelay(100);
+	  osDelay(50);
 	  sendDataMaster16();
-	  osDelay(100);
+	  osDelay(50);
 	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_11);
   }
   /* USER CODE END FuncModbusSend */
@@ -186,8 +186,9 @@ void FuncTelDial(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-	  osDelay(100);
+	  osDelay(10);
 	  HAL_IWDG_Refresh(&hiwdg);
+	  gasAlermRx();
   }
   /* USER CODE END FuncTelDial */
 }

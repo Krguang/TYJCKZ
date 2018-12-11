@@ -466,6 +466,6 @@ void dataProcessing() {
 	if (gasSensorSwitch == 1)
 	{
 		gasCollect();
-		//gasAlerm();
+		gasAlerm();
 	}
 }

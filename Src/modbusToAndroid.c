@@ -33,7 +33,7 @@ void sendDataMaster03() {
 	txBuf[2] = 0x00;
 	txBuf[3] = 0x00;
 	txBuf[4] = 0x00;
-	txBuf[5] = 0x05;//读5位
+	txBuf[5] = 0x03;//读5位
 	temp = GetCRC16(txBuf, 6);
 	txBuf[6] = (uint8_t)(temp & 0xff);
 	txBuf[7] = (uint8_t)(temp >> 8);
@@ -49,10 +49,10 @@ void sendDataMaster16() {
 	txBuf[0] = M2ASlaveAdd;
 	txBuf[1] = 0x10;
 	txBuf[2] = 0x00;         //数据的起始地址；
-	txBuf[3] = 0x06;
+	txBuf[3] = 0x03;
 	txBuf[4] = 0x00;         //数据的个数；
-	txBuf[5] = 26;
-	txBuf[6] = 52;         //数据的字节数；
+	txBuf[5] = 29;
+	txBuf[6] = 58;         //数据的字节数；
 	for (i = 0; i<txBuf[5]; i++) {
 		txBuf[7 + 2 * i] = (uint8_t)(localData[i+ txBuf[3]] >> 8);
 		txBuf[8 + 2 * i] = (uint8_t)(localData[i+ txBuf[3]] & 0xff);
