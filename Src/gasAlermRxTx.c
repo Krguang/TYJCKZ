@@ -158,7 +158,7 @@ static void modbusMasterDecode(unsigned char *MDbuf, unsigned char len) {
 			{
 				localData[i + 4] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
 			}
-			else if(i > 1)
+			else if(i > 2)
 			{
 				localData[i + 13] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
 			}
@@ -172,7 +172,7 @@ static void modbusMasterDecode(unsigned char *MDbuf, unsigned char len) {
 			{
 				localData[i + 5] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
 			}
-			else
+			else if(i > 2)
 			{
 				localData[i + 21] = (uint16_t)(MDbuf[3 + 2 * i] << 8) + MDbuf[4 + 2 * i];
 			}
