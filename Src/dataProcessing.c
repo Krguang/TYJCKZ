@@ -256,31 +256,31 @@ static void gasCollect() {
 		ADC_Average[i] = 0;
 	}
 }
-/*
+
 
 static void voltageOutput() {
 
-	switch (localData[3])
+	switch (localData[20])
 	{
 	case 0: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0);//0V
 		break;
-	case 1: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 550);//1V
+	case 1: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 410);//1V
 		break;
-	case 2: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 1000);//2V
+	case 2: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 819);//2V
 		break;
-	case 3: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 1400);//3V
+	case 3: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 1229);//3V
 		break;
-	case 4: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 1750);//4V
+	case 4: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 1638);//4V
 		break;
-	case 5: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2100);//5V
+	case 5: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2048);//5V
 		break;
-	case 6: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2500);//6V
+	case 6: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2457);//6V
 		break;
-	case 7: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2900);//7V
+	case 7: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2867);//7V
 		break;
-	case 8: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 3260);//8V
+	case 8: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 3276);//8V
 		break;
-	case 9: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 3655);//9V
+	case 9: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 3686);//9V
 		break;
 	case 10: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 4095);//10V
 		break;
@@ -289,27 +289,27 @@ static void voltageOutput() {
 		break;
 	}
 
-	switch (localData[4])
+	switch (localData[21])
 	{
 	case 0: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 0);//0V
 		break;
-	case 1: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 550);//1V
+	case 1: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 410);//1V
 		break;
-	case 2: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 1000);//2V
+	case 2: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 819);//2V
 		break;
-	case 3: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 1400);//3V
+	case 3: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 1229);//3V
 		break;
-	case 4: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 1750);//4V
+	case 4: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 1638);//4V
 		break;
-	case 5: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 2100);//5V
+	case 5: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 2048);//5V
 		break;
-	case 6: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 2500);//6V
+	case 6: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 2457);//6V
 		break;
-	case 7: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 2900);//7V
+	case 7: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 2867);//7V
 		break;
-	case 8: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 3260);//8V
+	case 8: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 3276);//8V
 		break;
-	case 9: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 3655);//9V
+	case 9: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 3686);//9V
 		break;
 	case 10: HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 4095);//10V
 		break;
@@ -318,7 +318,6 @@ static void voltageOutput() {
 		break;
 	}
 }
-*/
 
 static void gasAlerm() {
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3)== GPIO_PIN_RESET) {
@@ -434,41 +433,13 @@ static void gasAlerm() {
 	}
 }
 
-/*
-static uint8_t SD2405_BCDtoDEC(uint8_t BCD_data)//change BCD_data to DEC_data
-{
-	uint8_t m_DEC_data[3];
-	m_DEC_data[0] = (BCD_data >> 4) & 0x0f;
-	m_DEC_data[1] = BCD_data & 0x0f;
-	m_DEC_data[2] = m_DEC_data[0] * 10 + m_DEC_data[1];
-	return m_DEC_data[2];
-}
-
-
-static void sendTime() {
-	static uint8_t timeTemp[7];
-	HAL_I2C_Mem_Read(&hi2c1, 0x64, 0, I2C_MEMADD_SIZE_8BIT , timeTemp , 7, 0xff);
-	for (uint8_t i = 0; i < 7; i++)
-	{
-		if (i==2)//小时数据去除前3位，保留真实数据
-		{
-			timeTemp[2] &= 0x3f;
-		}
-		localData[13 + i] = SD2405_BCDtoDEC(timeTemp[i]);
-	}
-}
-*/
-
-
 void dataProcessing() {
 	backgroundMusic();
 	relayControl();
-	//voltageOutput();
-	//sendTime();
+	voltageOutput();
 	gasCollect();
 	if (gasSensorSwitch==1)
 	{
-		//gasCollect();
 		gasAlerm();
 	}
 }

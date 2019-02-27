@@ -3,11 +3,11 @@
 
 uint8_t M2ASlaveAdd = 1;
 
-uint8_t txBuf[50];
+uint8_t txBuf[128];
 uint8_t txCount = 0;
 
-uint16_t localData[50];
-
+uint16_t localData[128];
+uint8_t modbus03StartNum;
 
 static uint16_t GetCRC16(uint8_t *arr_buff, uint8_t len) {  //CRC校验程序
 	uint16_t crc = 0xFFFF;
@@ -26,14 +26,15 @@ static uint16_t GetCRC16(uint8_t *arr_buff, uint8_t len) {  //CRC校验程序
 	return (crc);
 }
 
-void sendDataMaster03() {
+void sendDataMaster03(uint8_t start,uint8_t num) {
+	modbus03StartNum = start;
 	uint16_t temp;
 	txBuf[0] = M2ASlaveAdd;
 	txBuf[1] = 0x03;
 	txBuf[2] = 0x00;
-	txBuf[3] = 0x00;
+	txBuf[3] = start;
 	txBuf[4] = 0x00;
-	txBuf[5] = 0x05;//读5位
+	txBuf[5] = num;//读5位
 	temp = GetCRC16(txBuf, 6);
 	txBuf[6] = (uint8_t)(temp & 0xff);
 	txBuf[7] = (uint8_t)(temp >> 8);
@@ -78,7 +79,7 @@ static void ModbusDecode(uint8_t *MDbuf, uint8_t len) {
 	if ((MDbuf[len - 1] != crch) || (MDbuf[len - 2] != crcl)) return;	//如CRC校验不符时直接退出
 	for (uint8_t i = 0; i < MDbuf[2]/2; i++)
 	{
-		localData[i] = (uint16_t)(MDbuf[3 + 2*i] << 8) + MDbuf[4 + 2*i];
+		localData[modbus03StartNum + i] = (uint16_t)(MDbuf[3 + 2*i] << 8) + MDbuf[4 + 2*i];
 	}
 }
 

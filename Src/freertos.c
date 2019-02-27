@@ -170,7 +170,9 @@ void FuncModbusSend(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-	  sendDataMaster03();
+	  sendDataMaster03(0,3);
+	  osDelay(100);
+	  sendDataMaster03(20, 2);
 	  osDelay(100);
 	  sendDataMaster16();
 	  osDelay(100);

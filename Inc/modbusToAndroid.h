@@ -7,7 +7,7 @@
 extern unsigned short localData[];
 
 void Usart1RxMonitor();
-void sendDataMaster03();
+void sendDataMaster03(uint8_t start, uint8_t num);
 void sendDataMaster16();
 
 #endif // __MODBUSTOANDROID_

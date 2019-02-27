@@ -5,7 +5,7 @@
     <Revision>0</Revision>
   </ToolchainVersion>
   <BspID>com.sysprogs.arm.stm32</BspID>
-  <BspVersion>2018.08</BspVersion>
+  <BspVersion>2018.12R2</BspVersion>
   <McuID>STM32F103VC</McuID>
   <MCUDefinitionFile>STM32F1xxxx/DeviceDefinitions/stm32f103xe.xml</MCUDefinitionFile>
   <MCUProperties>
@@ -15,12 +15,12 @@
         <Value>flash</Value>
       </KeyValue>
       <KeyValue>
-        <Key>com.sysprogs.toolchainoptions.arm.libctype</Key>
-        <Value>--specs=nano.specs</Value>
+        <Key>com.sysprogs.mcuoptions.ignore_startup_file</Key>
+        <Value />
       </KeyValue>
       <KeyValue>
-        <Key>com.sysprogs.toolchainoptions.arm.compactcpp</Key>
-        <Value>compactcpp</Value>
+        <Key>com.sysprogs.toolchainoptions.arm.libctype</Key>
+        <Value>--specs=nano.specs</Value>
       </KeyValue>
       <KeyValue>
         <Key>com.sysprogs.toolchainoptions.arm.libnosys</Key>
