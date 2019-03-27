@@ -431,6 +431,120 @@ static void gasAlerm() {
 	}
 }
 
+static void gasAlermMaster() {
+	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 0);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 0);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 1);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 1);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 2);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 2);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 3);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 3);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 4);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 4);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 5);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 5);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 6);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 6);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 7);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 7);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 8);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 8);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 9);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 9);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 10);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 10);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_2) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 11);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 11);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_1) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 12);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 12);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_0) == GPIO_PIN_RESET) {
+		localData[32] |= (1 << 13);
+	}
+	else
+	{
+		localData[32] &= ~(1 << 13);
+	}
+}
+
 /*
 static uint8_t SD2405_BCDtoDEC(uint8_t BCD_data)//change BCD_data to DEC_data
 {
@@ -463,9 +577,13 @@ void dataProcessing() {
 	//voltageOutput();
 	//sendTime();
 	//gasCollect();
-	if (gasSensorSwitch == 1)
+	if (gasSensorSwitch == 1)	//从站时采集气体报警和值
 	{
 		gasCollect();
 		gasAlerm();
+	}
+	else     //主站时采集采集气体报警到数组第32位
+	{
+		gasAlermMaster();
 	}
 }
