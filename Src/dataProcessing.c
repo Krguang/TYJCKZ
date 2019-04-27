@@ -456,7 +456,7 @@ static void gasAlerm() {
 }
 
 void dataProcessing() {
-	backgroundMusic();
+	//backgroundMusic();
 	relayControl();
 	voltageOutput();
 	gasCollect();
